@@ -33,3 +33,20 @@ document.querySelectorAll('img').forEach(img => {
                 }
             });
         });
+function showModelPreview(imgElement) {
+    // main.jsで定義された関数を呼び出し
+    if (window.showModelPreview) {
+        window.showModelPreview(imgElement);
+    } else {
+        // フォールバック
+        imgElement.style.display = 'none';
+        const fallback = imgElement.nextElementSibling;
+        if (fallback) {
+            fallback.style.display = 'flex';
+            fallback.innerHTML = '<div style="display:flex; align-items:center; justify-content:center; height:100%; color:#666;">3Dモデル読み込み中...</div>';
+        }
+    }
+}
+
+// グローバル関数として定義
+window.showModelPreview = showModelPreview;
