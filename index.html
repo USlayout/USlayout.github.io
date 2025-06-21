@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="データサイエンス学科3年生のポートフォリオ">
+    <title>Portfolio - Data Science Student</title>
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/GLTFLoader.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+    <body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#top" class="logo">Portfolio</a>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#top">TOP</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#works">Works</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- ヒーローセクション -->
+        <section id="top" class="hero">
+            <div class="container">
+                <h1>Welcome to My Portfolio</h1>
+                <p>データサイエンスとクリエイティブ技術で未来を創造する</p>
+                <div class="subtitle">日本工業大学 先進工学部 データサイエンス学科 3年 (27卒予定)</div>
+                <a href="#works" class="cta-button">作品を見る</a>
+            </div>
+        </section>
+
+        <!-- About Me -->
+        <section id="about" class="section about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <p class="about-text">
+                        データサイエンスを専攻しながら、3Dモデリング、ゲーム開発、機械学習など幅広い分野で創作活動を行っています。
+                        技術と創造性を組み合わせ、実用的で革新的なソリューションを生み出すことに情熱を注いでいます。
+                    </p>
+                    <div class="university-info">
+                        <strong>日本工業大学 先進工学部 データサイエンス学科 3年</strong><br>
+                        2027年卒業予定
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Works -->
+        <section id="works" class="section works">
+            <div class="container">
+                <h2 class="section-title">Works</h2>
+                <div class="portfolio-grid">
+                    <!-- Unity Game -->
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <div class="in-progress">制作中</div>
+                            <img src="img/sakana_game_1.png" alt="魚達の闘争" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; background:linear-gradient(45deg, #f0f0f0, #e0e0e0);">
+                                Unity Game Screenshot
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">魚達の闘争</h3>
+                            <div class="project-duration">制作期間：1週間</div>
+                            <p class="project-description">Unityで制作した2D対戦ゲーム。Joy-Conを使った直感的な操作が特徴。</p>
+                            <ul class="project-tags">
+                                <li>Unity</li>
+                                <li>C#</li>
+                                <li>Joy-Con</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- 3D Models -->
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <img src="img/model_kuro_10.png" alt="アヒルパーカマン"
+                            onerror="showModelPreview(this)">
+                            <div class="model-preview" style="display:none; width:100%; height:100%;"></div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">アヒルパーカマン</h3>
+                            <div class="project-duration">制作期間：1週間</div>
+                            <p class="project-description">Blenderで制作した人形ローポリモデル。キャラクター性を重視したデザイン。</p>
+                            <ul class="project-tags">
+                            <li>Blender</li>
+                            <li>3Dモデリング</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <img src="img/ihuri-to_1.png" alt="イフリート" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; background:linear-gradient(45deg, #f0f0f0, #e0e0e0);">
+                                Ifrit Model Preview
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">イフリート</h3>
+                            <div class="project-duration">制作期間：3日</div>
+                            <p class="project-description">Blenderで制作したゲーム用モデル。スカルプト技術を活用した詳細なモデリング。</p>
+                            <ul class="project-tags">
+                                <li>Blender</li>
+                                <li>スカルプト</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <img src="img/black_1.png" alt="ブラックドラゴン" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; background:linear-gradient(45deg, #f0f0f0, #e0e0e0);">
+                                Black Dragon Model
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">ブラックドラゴン</h3>
+                            <div class="project-duration">制作期間：2日</div>
+                            <p class="project-description">3Dプリント用フィギュアモデル。精密なスカルプト技術で制作。</p>
+                            <ul class="project-tags">
+                                <li>Blender</li>
+                                <li>3Dプリント</li>
+                                <li>スカルプト</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Engineering Projects -->
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(45deg, #e3f2fd, #bbdefb);">
+                                🤖 Quadruped Robot
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">四足歩行ロボット</h3>
+                            <div class="project-duration">制作期間：2週間</div>
+                            <p class="project-description">自律歩行が可能な四足歩行ロボットの設計・制作。</p>
+                            <ul class="project-tags">
+                                <li>ロボティクス</li>
+                                <li>Arduino</li>
+                                <li>機械設計</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Data Science Projects -->
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(45deg, #f3e5f5, #e1bee7);">
+                                🔬 Cell Analysis
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Kaggle細胞コンペ</h3>
+                            <div class="project-duration">制作期間：2週間</div>
+                            <p class="project-description">画像解析による細胞分類コンペティション。深層学習を活用。</p>
+                            <ul class="project-tags">
+                                <li>Python</li>
+                                <li>機械学習</li>
+                                <li>画像処理</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(45deg, #e8f5e8, #c8e6c9);">
+                                📊 Sensor Data
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Kaggleセンサデータコンペ</h3>
+                            <div class="project-duration">制作期間：2週間</div>
+                            <p class="project-description">センサーデータを用いた予測モデルの構築と最適化。</p>
+                            <ul class="project-tags">
+                                <li>Python</li>
+                                <li>時系列解析</li>
+                                <li>データ前処理</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- IoT Project -->
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(45deg, #fff3e0, #ffcc80);">
+                                🔑 Smart Lock
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">部室スマートキー</h3>
+                            <div class="project-duration">制作期間：2週間</div>
+                            <p class="project-description">NFC技術を活用した部室用スマートロックシステム。</p>
+                            <ul class="project-tags">
+                                <li>IoT</li>
+                                <li>NFC</li>
+                                <li>Arduino</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- AI Game -->
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(45deg, #fce4ec, #f8bbd9);">
+                                🎮 AI Game
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">AI当たり屋ゲーム</h3>
+                            <div class="project-duration">制作期間：2日</div>
+                            <p class="project-description">YOLO物体検出を使ったリアルタイム画像認識ゲーム。</p>
+                            <ul class="project-tags">
+                                <li>Python</li>
+                                <li>YOLO</li>
+                                <li>OpenCV</li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="section skills">
+            <div class="container">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>🎮 ゲーム開発</h3>
+                        <ul class="skill-list">
+                            <li>Unity</li>
+                            <li>C#</li>
+                            <li>ゲーム設計</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🎨 3Dモデリング</h3>
+                        <ul class="skill-list">
+                            <li>Blender</li>
+                            <li>スカルプト</li>
+                            <li>3Dプリント</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>📊 データサイエンス</h3>
+                        <ul class="skill-list">
+                            <li>Python</li>
+                            <li>機械学習</li>
+                            <li>統計解析</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🔧 エンジニアリング</h3>
+                        <ul class="skill-list">
+                            <li>Arduino</li>
+                            <li>IoT</li>
+                            <li>ロボティクス</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <ul class="footer-nav">
+                <li><a href="#top">TOP</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#works">Works</a></li>
+                <li><a href="#skills">Skills</a></li>
+            </ul>
+            <div class="footer-copyright">
+                © 2025 My Portfolio - Data Science Student
+            </div>
+        </div>
+    </footer>
+        <script src="script.js"></script>
+        <script type="module" src="main.js"></script>
+    </body>
+</html>
