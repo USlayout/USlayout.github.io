@@ -9,14 +9,28 @@
 <body>
     <div id="container">
         <div id="controls">
-            <h3>3Dモデルビューア</h3>
-            <input type="file" id="file-input" accept=".gltf,.glb" />
+            <h3>Portfolio 3D Models</h3>
+            <div id="model-selector">
+                <label>作品を選択:</label>
+                <select id="model-select">
+                    <option value="">-- 作品を選択 --</option>
+                </select>
+            </div>
+            <div id="model-info">
+                <h4 id="model-title">作品名</h4>
+                <p id="model-description">作品の説明がここに表示されます</p>
+            </div>
             <div>
                 <button id="reset-camera">カメラリセット</button>
                 <button id="toggle-wireframe">ワイヤーフレーム</button>
+                <button id="auto-rotate">自動回転</button>
             </div>
             <div>
                 <label>ライトの強さ: <input type="range" id="light-intensity" min="0" max="3" step="0.1" value="1"></label>
+            </div>
+            <div>
+                <input type="file" id="file-input" accept=".gltf,.glb" style="display: none;" />
+                <button onclick="document.getElementById('file-input').click()">ファイルから読み込み</button>
             </div>
         </div>
         

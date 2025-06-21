@@ -1,7 +1,24 @@
 // Three.js の基本要素
-let scene, camera, renderer, controls;
+let scene, camera, renderer;
 let currentModel = null;
 let ambientLight, directionalLight;
+let isAutoRotating = false;
+
+// ポートフォリオ作品データ
+const portfolioModels = [
+    {
+        id: 'test1',
+        name: 'ロボットキャラクター',
+        description: '3DCGで制作したオリジナルロボットキャラクター。Blenderで作成し、リギング・アニメーション対応。',
+        path: 'model/test.glb'
+    },
+    {
+        id: 'test2',
+        name: '近未来建築',
+        description: 'SF映画をイメージした近未来的な建物のモデル。ライティングとマテリアルに特にこだわりました。',
+        path: 'model/test2.glb'
+    },
+];
 
 // 初期化
 function init() {
@@ -141,6 +158,19 @@ function setupControls() {
 
 // イベントリスナーの設定
 function setupEventListeners() {
+    // モデル選択
+    const modelSelect = document.getElementById('model-select');
+    
+    // ポートフォリオモデルをセレクトボックスに追加
+    portfolioModels.forEach(model => {
+        const option = document.createElement('option');
+        option.value = model.id;
+        option.textContent = model.name;
+        modelSelect.appendChild(option);
+    });
+    
+    modelSelect.addEventListener('change', handleModelSelect);
+
     // ファイル入力
     document.getElementById('file-input').addEventListener('change', handleFileLoad);
 
@@ -149,6 +179,9 @@ function setupEventListeners() {
 
     // ワイヤーフレーム切り替え
     document.getElementById('toggle-wireframe').addEventListener('click', toggleWireframe);
+    
+    // 自動回転切り替え
+    document.getElementById('auto-rotate').addEventListener('click', toggleAutoRotate);
 
     // ライト強度調整
     document.getElementById('light-intensity').addEventListener('input', (e) => {
@@ -186,9 +219,123 @@ function addDefaultObject() {
     scene.add(floor);
 
     currentModel = cube;
+    updateModelInfo('デフォルトキューブ', 'ポートフォリオ作品を選択するか、ファイルから3Dモデルを読み込んでください。');
 }
 
-// ファイル読み込み処理
+// モデル選択処理
+function handleModelSelect(event) {
+    const selectedId = event.target.value;
+    if (!selectedId) {
+        // デフォルトオブジェクトを表示
+        clearCurrentModel();
+        addDefaultObject();
+        updateModelInfo('デフォルトキューブ', 'ファイルまたは作品を選択してください。');
+        return;
+    }
+    
+    const selectedModel = portfolioModels.find(model => model.id === selectedId);
+    if (selectedModel) {
+        loadModelFromPath(selectedModel.path);
+        updateModelInfo(selectedModel.name, selectedModel.description);
+    }
+}
+
+// パスからモデルを読み込み
+function loadModelFromPath(modelPath) {
+    const loading = document.getElementById('loading');
+    loading.style.display = 'block';
+    
+    // GLTFLoaderを使用してモデルを読み込み
+    const loader = new THREE.GLTFLoader();
+    
+    loader.load(
+        modelPath,
+        function(gltf) {
+            // 既存のモデルを削除
+            clearCurrentModel();
+            
+            // 新しいモデルを追加
+            currentModel = gltf.scene;
+            setupModel(currentModel);
+            
+            // ローディング非表示
+            loading.style.display = 'none';
+            
+            console.log('Model loaded successfully:', modelPath);
+        },
+        function(progress) {
+            console.log('Loading progress: ', (progress.loaded / progress.total * 100) + '%');
+        },
+        function(error) {
+            console.error('Error loading model:', error);
+            loading.style.display = 'none';
+            
+            // エラー時はデフォルトオブジェクトを表示
+            clearCurrentModel();
+            addDefaultObject();
+            updateModelInfo('読み込みエラー', 'モデルファイルが見つかりません。デフォルトオブジェクトを表示しています。');
+        }
+    );
+}
+
+// モデル情報更新
+function updateModelInfo(title, description) {
+    document.getElementById('model-title').textContent = title;
+    document.getElementById('model-description').textContent = description;
+}
+
+// 現在のモデルをクリア
+function clearCurrentModel() {
+    if (currentModel) {
+        scene.remove(currentModel);
+        currentModel = null;
+    }
+    
+    // デフォルトオブジェクト（キューブ）も削除
+    const objectsToRemove = [];
+    scene.traverse((child) => {
+        if (child.isMesh && child !== currentModel) {
+            objectsToRemove.push(child);
+        }
+    });
+    objectsToRemove.forEach(obj => {
+        if (obj.parent) {
+            obj.parent.remove(obj);
+        }
+    });
+}
+
+// モデルの設定
+function setupModel(model) {
+    // モデルのスケール調整
+    const box = new THREE.Box3().setFromObject(model);
+    const size = box.getSize(new THREE.Vector3());
+    const maxSize = Math.max(size.x, size.y, size.z);
+    const scale = 2 / maxSize; // 適切なサイズに調整
+    model.scale.multiplyScalar(scale);
+    
+    // モデルを中央に配置
+    const center = box.getCenter(new THREE.Vector3());
+    model.position.sub(center.multiplyScalar(scale));
+    
+    // シャドウの設定
+    model.traverse((child) => {
+        if (child.isMesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+        }
+    });
+    
+    scene.add(model);
+}
+
+// 自動回転切り替え
+function toggleAutoRotate() {
+    isAutoRotating = !isAutoRotating;
+    const button = document.getElementById('auto-rotate');
+    button.textContent = isAutoRotating ? '自動回転停止' : '自動回転';
+    button.style.background = isAutoRotating ? '#f44336' : '#4CAF50';
+}
 function handleFileLoad(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -299,8 +446,13 @@ function onWindowResize() {
 function animate() {
     requestAnimationFrame(animate);
     
-    // デフォルトオブジェクトの回転
-    if (currentModel && currentModel.geometry && currentModel.geometry.type === 'BoxGeometry') {
+    // 自動回転
+    if (isAutoRotating && currentModel) {
+        currentModel.rotation.y += 0.01;
+    }
+    
+    // デフォルトオブジェクト（キューブ）の場合の回転
+    if (currentModel && currentModel.geometry && currentModel.geometry.type === 'BoxGeometry' && !isAutoRotating) {
         currentModel.rotation.x += 0.01;
         currentModel.rotation.y += 0.01;
     }
