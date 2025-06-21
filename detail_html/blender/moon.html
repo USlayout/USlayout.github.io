@@ -16,27 +16,48 @@
             <ul>
                 <li><a href="../../index.html">ホーム</a></li>
                 <li><a href="../../blender.html">Blenderのチュートリアル一覧</a></li>
+                <li><a href="/model/path_test.html">月の作成</a></li>
             </ul>
         </nav>
     </header>
 
-    <a href="#" class="project-card">
-                        <div class="project-image">
-                            <img src="img/img.png" alt="アヒルパーカマン"
-                            onerror="showModelPreview(this)">
-                            <div class="model-preview" style="display:none; width:100%; height:100%;"></div>
-                        </div>
-                        <div class="project-content">
-                            <h3 class="project-title">アヒルパーカマン</h3>
-                            <div class="project-duration">制作期間：1週間</div>
-                            <p class="project-description">Blenderで制作した人形ローポリモデル。キャラクター性を重視したデザイン。</p>
-                            <ul class="project-tags">
-                            <li>Blender</li>
-                            <li>3Dモデリング</li>
-                            </ul>
-                        </div>
-    </a>
+    <!--3Dモデル表示-->
+    <div id="model-viewer">
+        <canvas id="three-canvas"></canvas>
 
+        <script>
+            // Three.jsを使って3Dモデルを表示するコード
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas') });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            const loader = new THREE.GLTFLoader();
+            loader.load('/model/test.glb', function(gltf) {
+                scene.add(gltf.scene);
+                gltf.scene.scale.set(0.5, 0.5, 0.5); // モデルのスケール調整
+                gltf.scene.position.set(0, 0, -5); // モデルの位置調整
+                animate();
+            });
+
+            function animate() {
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+            }
+
+            camera.position.z = 5;
+
+            window.addEventListener('resize', function() {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                renderer.setSize(width, height);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            });
+        </script>
+
+    </div>
     <main>
         <section>
             <h2>太陽系を作成する一貫で作成したプロジェクトです。</h2>
