@@ -48,5 +48,15 @@ function showModelPreview(imgElement) {
     }
 }
 
+document.querySelectorAll('.model-link').forEach(link => {
+    link.addEventListener('click', function() {
+        const url = this.getAttribute('data-url');
+        if (url) {
+            window.open(url, '_blank'); // 新しいタブで開く場合
+            // location.href = url; // 同じタブで開く場合はこちら
+        }
+    });
+});
+
 // グローバル関数として定義
 window.showModelPreview = showModelPreview;
