@@ -8,15 +8,15 @@ let isAutoRotating = false;
 const portfolioModels = [
     {
         id: 'test1',
-        name: 'ロボットキャラクター',
+        name: 'test1',
         description: '3DCGで制作したオリジナルロボットキャラクター。Blenderで作成し、リギング・アニメーション対応。',
-        path: 'model/test.glb'
+        path: '/model/test.glb'
     },
     {
         id: 'test2',
-        name: '近未来建築',
+        name: 'test2',
         description: 'SF映画をイメージした近未来的な建物のモデル。ライティングとマテリアルに特にこだわりました。',
-        path: 'model/test2.glb'
+        path: '/model/test2.glb'
     },
 ];
 
@@ -219,7 +219,7 @@ function addDefaultObject() {
     scene.add(floor);
 
     currentModel = cube;
-    updateModelInfo('デフォルトキューブ', 'ポートフォリオ作品を選択するか、ファイルから3Dモデルを読み込んでください。');
+    updateModelInfo('デフォルトキューブ', 'ポートフォリオ作品を選択してください。');
 }
 
 // モデル選択処理
@@ -352,7 +352,7 @@ function handleFileLoad(event) {
 }
 
 // GLTFモデルの読み込み
-function loadGLTFModel(arrayBuffer) {
+/*function loadGLTFModel(arrayBuffer) {
     // GLTFLoaderの代替実装（簡単なOBJローダー的な処理）
     // 実際の実装では THREE.GLTFLoader を使用
     try {
@@ -416,7 +416,7 @@ function loadGLTFModel(arrayBuffer) {
         document.getElementById('loading').style.display = 'none';
         alert('ファイルの読み込みに失敗しました。');
     }
-}
+}*/
 
 // カメラリセット
 function resetCamera() {
