@@ -10,13 +10,13 @@ const portfolioModels = [
         id: 'test1',
         name: 'test1',
         description: '3DCGで制作したオリジナルロボットキャラクター。Blenderで作成し、リギング・アニメーション対応。',
-        path: '/model/test.glb'
+        path: 'model/test.glb'
     },
     {
         id: 'test2',
         name: 'test2',
         description: 'SF映画をイメージした近未来的な建物のモデル。ライティングとマテリアルに特にこだわりました。',
-        path: '/model/test2.glb'
+        path: 'model/test2.glb'
     },
 ];
 
@@ -229,7 +229,7 @@ function handleModelSelect(event) {
         // デフォルトオブジェクトを表示
         clearCurrentModel();
         addDefaultObject();
-        updateModelInfo('デフォルトキューブ', 'ファイルまたは作品を選択してください。');
+        updateModelInfo('デフォルトキューブ');
         return;
     }
     
