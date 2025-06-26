@@ -6,10 +6,7 @@
     <meta name="description" content="データサイエンス学科3年生のポートフォリオ">
     <title>Portfolio - Data Science Student</title>
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!--<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/GLTFLoader.js"></script>-->
-    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">   
     <link rel="stylesheet" href="style.css">
 </head>
     <body>
@@ -62,10 +59,11 @@
                 <h2 class="section-title">Works</h2>
                 <div class="portfolio-grid">
                     <!-- Unity Game -->
-                    <a href="#" class="project-card">
+                     <!-- 
+                    <div class="project-card" onclick="openModal('cloud')">
                         <div class="project-image">
                             <div class="in-progress">制作中</div>
-                            <img src="img/sakana_game_1.png" alt="クラウドストレージ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <img src="img/no_image.png" alt="クラウドストレージ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                             <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; background:linear-gradient(45deg, #f0f0f0, #e0e0e0);">
                                 仕様策定中
                             </div>
@@ -81,9 +79,11 @@
                                 <li>Mysql</li>
                             </ul>
                         </div>
-                    </a>
-                    <a href="#" class="project-card">
+                    </div>
+
+                    <div class="project-card" onclick="openModal('android')">
                         <div class="project-image">
+                            <div class="in-progress">制作中</div>
                             <img src="img/sakana_game_1.png" alt="スマートキー向けAndroidアプリ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                             <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; background:linear-gradient(45deg, #f0f0f0, #e0e0e0);">
                                 仕様策定中
@@ -98,12 +98,12 @@
                                 <li>Kotlin</li>
                             </ul>
                         </div>
-                    </a>
-                    <!-- 3D Models -->
-                    <div class="project-card" onclick="openModal('ahiru-modal')">
+                    </div> -->
+                    <!-- 3D Models --> 
+                    <div class="project-card" onclick="openModal('UsefullDevice')">
                         <div class="project-image">
                             <div class="in-progress">改良中/共同制作</div>                          
-                            <img src="img/img.png" alt="Usefull device">
+                            <img src="img/ud_android.jpg" alt="Usefull device">
                             <div class="model-preview" style="display:none; width:100%; height:100%;"></div>
                         </div>
                         <div class="project-content">
@@ -255,37 +255,225 @@
         <section id="skills" class="section skills">
             <div class="container">
                 <h2 class="section-title">Skills</h2>
+                <div class="skills-intro">
+                    <p>これまでに学習・習得した技術スキルと、それぞれの習熟度をご紹介します。</p>
+                </div>
                 <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3> ゲーム開発</h3>
+                    <div class="skill-category featured">
+                        <div class="skill-category-header">
+                            <div class="skill-icon">🎮</div>
+                            <h3>ゲーム開発</h3>
+                        </div>
                         <ul class="skill-list">
-                            <li>Unity</li>
-                            <li>C#</li>
-                            <li>ゲーム設計</li>
+                            <li class="skill-item">
+                                <span class="skill-name">Unreal Engine 5</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot"></div>
+                                    </div>
+                                    <span class="skill-percentage">80%</span>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">C++/ブループリント</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot"></div>
+                                    </div>
+                                    <span class="skill-percentage">75%</span>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Blenderモデル制作</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                    </div>
+                                    <span class="skill-percentage">90%</span>
+                                </div>
+                            </li>
                         </ul>
                     </div>
+
                     <div class="skill-category">
-                        <h3> 3Dモデリング</h3>
+                        <div class="skill-category-header">
+                            <div class="skill-icon">💻</div>
+                            <h3>プログラミング言語</h3>
+                        </div>
                         <ul class="skill-list">
-                            <li>Blender</li>
-                            <li>スカルプト</li>
-                            <li>3Dプリント</li>
+                            <li class="skill-item">
+                                <span class="skill-name">C/C++</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot"></div>
+                                    </div>
+                                    <span class="skill-percentage">80%</span>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Rust</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot"></div>
+                                    </div>
+                                    <span class="skill-percentage">75%</span>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Python</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                    </div>
+                                    <span class="skill-percentage">85%</span>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Go</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot"></div>
+                                        <div class="skill-dot"></div>
+                                    </div>
+                                    <span class="skill-percentage">60%</span>
+                                </div>
+                            </li>
                         </ul>
                     </div>
+
                     <div class="skill-category">
-                        <h3> データサイエンス</h3>
+                        <div class="skill-category-header">
+                            <div class="skill-icon">🛠️</div>
+                            <h3>開発環境・ツール</h3>
+                        </div>
                         <ul class="skill-list">
-                            <li>Python</li>
-                            <li>機械学習</li>
-                            <li>統計解析</li>
+                            <li class="skill-item">
+                                <span class="skill-name">VS Code</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                    </div>
+                                    <span class="skill-percentage">95%</span>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">WSL2 (Ubuntu)</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot"></div>
+                                    </div>
+                                    <span class="skill-percentage">80%</span>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Android Studio</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot"></div>
+                                        <div class="skill-dot"></div>
+                                    </div>
+                                    <span class="skill-percentage">65%</span>
+                                </div>
+                            </li>
                         </ul>
                     </div>
+
                     <div class="skill-category">
-                        <h3> エンジニアリング</h3>
+                        <div class="skill-category-header">
+                            <div class="skill-icon">🌐</div>
+                            <h3>インフラ・その他</h3>
+                        </div>
                         <ul class="skill-list">
-                            <li>Arduino</li>
-                            <li>IoT</li>
-                            <li>ロボティクス</li>
+                            <li class="skill-item">
+                                <span class="skill-name">SQL</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot"></div>
+                                    </div>
+                                    <span class="skill-percentage">75%</span>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Linux (Ubuntu Server)</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot"></div>
+                                    </div>
+                                    <span class="skill-percentage">80%</span>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">GitHub</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                    </div>
+                                    <span class="skill-percentage">90%</span>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Cloudflare</span>
+                                <div class="skill-level">
+                                    <div class="skill-dots">
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot active"></div>
+                                        <div class="skill-dot"></div>
+                                        <div class="skill-dot"></div>
+                                    </div>
+                                    <span class="skill-percentage">70%</span>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -309,9 +497,72 @@
     </footer>
 
     <!-- モーダル（詳細表示） -->
-    <div id="ahiru-modal" class="modal" onclick="closeModal('ahiru-modal')">
+    <div id="UsefullDevice" class="modal" onclick="closeModal('UsefullDevice')">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeModal('ahiru-modal')">&times;</button>
+            <button class="modal-close" onclick="closeModal('UsefullDevice')">&times;</button>
+            
+            <div class="modal-header">
+                <h2>UsefullDevice</h2>
+                <div class="modal-duration">制作期間：3ヶ月</div>
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-image-section">
+                    <img src="img/ud_android.jpg" alt="Usefull device" class="modal-main-image">
+                    <div class="modal-image-gallery">
+                        <img src="img/ud_android.jpg" alt="1" class="modal-thumbnail active">
+                        <img src="img/ud_android1.jpg" alt="2" class="modal-thumbnail">
+                        <img src="img/usefulldev_ser.png" alt="3" class="modal-thumbnail">
+                    </div>
+                </div>
+                
+                <div class="modal-info-section">
+                    <div class="modal-description">
+                        <h3>プロジェクト概要</h3>
+                        <p>Rust+Slintを用いて制作した左手デバイスです。部活でBlenderを使用してるため少しでも制作しやすくするためクロスプラットフォームのアプリを制作しました。</p>
+                        
+                        <h3>制作のポイント</h3>
+                        <ul>
+                            <li>クロスプラットフォーム対応</li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        
+                        <h3>使用ツール・技術</h3>
+                        <div class="modal-tech-tags">
+                            <span class="tech-tag">Rust</span>
+                            <span class="tech-tag">Slint</span>
+                            <span class="tech-tag">tokio</span>
+                            <span class="tech-tag">mdns</span>
+
+                        </div>
+                        
+                        <h3>制作工程</h3>
+                        <ol>
+                            <li>ある程度の仕様の策定</li>
+                            <li>Windowsでの基本システム構築</li>
+                            <li>スマホで動作させるため非同期化</li>
+                            <li>サーバーのwin・mac対応化</li>
+                            <li>ios向けの調整中</li>
+                            <li>機能強化調整中</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button class="modal-button primary" onclick="window.open('https://github.com/aki-com/UsefulDevice', '_blank')">
+                            GitHub
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="android" class="modal" onclick="closeModal('android')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('android')">&times;</button>
             
             <div class="modal-header">
                 <h2>アヒルパーカマン</h2>
@@ -351,11 +602,8 @@
                         
                         <h3>制作工程</h3>
                         <ol>
-                            <li>コンセプトデザイン・ラフスケッチ</li>
-                            <li>基本形状のモデリング</li>
-                            <li>ディテールの追加とローポリ最適化</li>
-                            <li>リグ作成とウェイトペイント</li>
-                            <li>最終調整とレンダリング</li>
+                            <li>仕様策定</li>
+                            <li>基幹システム構築中</li>
                         </ol>
                     </div>
                     
@@ -370,6 +618,58 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="cloud" class="modal" onclick="closeModal('cloud')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('cloud')">&times;</button>
+            
+            <div class="modal-header">
+                <h2>クラウドストレージ</h2>
+                <div class="modal-duration">制作中</div>
+            </div>        
+            <div class="modal-body">
+                <div class="modal-image-section">
+                    <img src="img/no_image.png" alt="no_image" class="modal-main-image">
+                    <div class="modal-image-gallery">
+                        <img src="img/no_image.png" alt="1" class="modal-thumbnail active">
+                    </div>
+                </div>
+                <div class="modal-info-section">
+                    <div class="modal-description">
+                        <h3>プロジェクト概要</h3>
+                        <p>部活のサーバーPCを用いて部員用にクラウドストレージシステムを構築する。ある意味初の本格システム構築を目指す。</p>
+                        
+                        <h3>制作予定事項</h3>
+                        <ul>
+                            <li>サーバーのバックエンドにGoを用いる。</li>
+                            <li>cloudflareを活用する。</li>
+                            <li>個人フォルダ・共有フォルダ等部活で使いやすい形を目指す。</li>
+                            <li>認証システムを構築する。</li>
+                        </ul>
+                        
+                        <h3>使用ツール・技術</h3>
+                        <div class="modal-tech-tags">
+                            <span class="tech-tag">ubuntu sever</span>
+                            <span class="tech-tag">Go</span>
+                            <span class="tech-tag">mysql</span>
+                        </div>
+                        
+                        <h3>制作工程</h3>
+                        <ol>
+                            <li>仕様策定</li>
+                            <li>基幹システム構築中</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 画像拡大表示用 -->
+    <div id="imageFullscreen" class="image-fullscreen" onclick="closeImageFullscreen()">
+        <img id="fullscreenImage" src="" alt="">
+        <button class="image-fullscreen-close" onclick="closeImageFullscreen()">&times;</button>
     </div>
 
     <script src="scripts.js"></script>

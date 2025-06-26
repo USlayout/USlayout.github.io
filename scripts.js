@@ -101,6 +101,14 @@ function downloadModel() {
 // ESCキーでモーダルを閉じる
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
+        // 画像拡大表示が開いている場合は優先して閉じる
+        const imageFullscreen = document.querySelector('.image-fullscreen.show');
+        if (imageFullscreen) {
+            closeImageFullscreen();
+            return;
+        }
+        
+        // モーダルが開いている場合は閉じる
         const openModal = document.querySelector('.modal.show');
         if (openModal) {
             closeModal(openModal.id);
@@ -120,3 +128,87 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // グローバル関数として定義
 window.showModelPreview = showModelPreview;
+
+// 画像拡大表示機能
+function showImageFullscreen(imgElement) {
+    const fullscreenDiv = document.getElementById('imageFullscreen');
+    const fullscreenImg = document.getElementById('fullscreenImage');
+    
+    if (fullscreenDiv && fullscreenImg && imgElement.src) {
+        fullscreenImg.src = imgElement.src;
+        fullscreenImg.alt = imgElement.alt;
+        fullscreenDiv.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeImageFullscreen() {
+    const fullscreenDiv = document.getElementById('imageFullscreen');
+    if (fullscreenDiv) {
+        fullscreenDiv.classList.remove('show');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// モーダル内の画像にクリックイベントを追加
+document.addEventListener('DOMContentLoaded', function() {
+    const thumbnails = document.querySelectorAll('.modal-thumbnail');
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            changeMainImage(this);
+        });
+    });
+    
+    // メイン画像とサムネイル画像にクリックイベントを追加
+    const modalImages = document.querySelectorAll('.modal-main-image, .modal-thumbnail');
+    modalImages.forEach(img => {
+        img.addEventListener('click', function(event) {
+            // changeMainImage機能を妨げないよう、少し遅延を入れる
+            setTimeout(() => showImageFullscreen(this), 100);
+        });
+    });
+    
+    // スキルセクションのアニメーション
+    initSkillsAnimation();
+});
+
+// スキルアニメーション機能
+function initSkillsAnimation() {
+    const skillCategories = document.querySelectorAll('.skill-category');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                animateSkillDots(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.5
+    });
+    
+    skillCategories.forEach(category => {
+        observer.observe(category);
+    });
+}
+
+function animateSkillDots(category) {
+    const skillItems = category.querySelectorAll('.skill-item');
+    
+    skillItems.forEach((item, index) => {
+        setTimeout(() => {
+            const dots = item.querySelectorAll('.skill-dot');
+            const activeDots = item.querySelectorAll('.skill-dot.active');
+            
+            // まず全てのドットを非アクティブにする
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // アクティブなドットを段階的に表示
+            activeDots.forEach((dot, dotIndex) => {
+                setTimeout(() => {
+                    dots[dotIndex].classList.add('active');
+                }, dotIndex * 150);
+            });
+        }, index * 200);
+    });
+}

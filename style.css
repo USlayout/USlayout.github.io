@@ -281,27 +281,97 @@
 
         /* Skillsセクション */
         .skills {
-            background: var(--bg-white);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skills::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" stroke="%23e2e8f0" fill="none" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .skills .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .skills-intro {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .skills-intro p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
 
         .skill-category {
-            background: var(--bg-light);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
+            background: var(--bg-white);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .skill-category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin-right: 1rem;
+            flex-shrink: 0;
         }
 
         .skill-category h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
         }
 
         .skill-list {
@@ -310,12 +380,99 @@
             margin: 0;
         }
 
-        .skill-list li {
-            background: var(--bg-white);
-            margin: 0.5rem 0;
-            padding: 0.8rem;
+        .skill-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:last-child {
+            border-bottom: none;
+        }
+
+        .skill-item:hover {
+            background: rgba(37, 99, 235, 0.02);
+            margin: 0 -1rem;
+            padding: 1rem;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .skill-name {
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .skill-level {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .skill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .skill-dot.active {
+            background: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        .skill-percentage {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 500;
+            min-width: 35px;
+            text-align: right;
+        }
+
+        /* プログレスバー版（オプション） */
+        .skill-progress {
+            width: 100%;
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .skill-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+            transition: width 1s ease-in-out;
+            transform-origin: left;
+        }
+
+        /* スキルレベルのアニメーション */
+        .skill-category.animate .skill-progress-bar {
+            animation: fillProgress 1.5s ease-in-out;
+        }
+
+        @keyframes fillProgress {
+            from { width: 0; }
+        }
+
+        /* 特別なスキルカテゴリのスタイル */
+        .skill-category.featured {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.02), rgba(30, 64, 175, 0.02));
+            border: 2px solid var(--primary-color);
+        }
+
+        .skill-category.featured .skill-icon {
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
 
         /* フッター */
@@ -701,4 +858,63 @@
         .modal-image-gallery::-webkit-scrollbar-thumb {
             background: var(--primary-color);
             border-radius: 2px;
+        }
+
+        /* 画像拡大表示用スタイル */
+        .image-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .image-fullscreen.show {
+            display: flex;
+        }
+
+        .image-fullscreen img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .image-fullscreen-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .image-fullscreen-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* モーダル画像にカーソルポインターを追加 */
+        .modal-main-image {
+            cursor: pointer;
+        }
+
+        .modal-thumbnail {
+            cursor: pointer;
         }
