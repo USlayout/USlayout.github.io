@@ -58,5 +58,65 @@ document.querySelectorAll('.model-link').forEach(link => {
     });
 });
 
+// モーダル機能
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden'; // スクロール無効化
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto'; // スクロール有効化
+    }
+}
+
+// サムネイル画像クリック機能
+function changeMainImage(thumbnailElement, mainImageId) {
+    const mainImage = document.getElementById(mainImageId) || 
+                     document.querySelector('.modal-main-image');
+    
+    if (mainImage && thumbnailElement.src) {
+        mainImage.src = thumbnailElement.src;
+        mainImage.alt = thumbnailElement.alt;
+        
+        // アクティブクラスを切り替え
+        document.querySelectorAll('.modal-thumbnail').forEach(thumb => {
+            thumb.classList.remove('active');
+        });
+        thumbnailElement.classList.add('active');
+    }
+}
+
+// モデルダウンロード機能（仮実装）
+function downloadModel() {
+    alert('モデルファイルのダウンロード機能は準備中です。');
+    // 実際にはここでファイルダウンロード処理を実装
+}
+
+// ESCキーでモーダルを閉じる
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const openModal = document.querySelector('.modal.show');
+        if (openModal) {
+            closeModal(openModal.id);
+        }
+    }
+});
+
+// サムネイルクリックイベントを初期化
+document.addEventListener('DOMContentLoaded', function() {
+    const thumbnails = document.querySelectorAll('.modal-thumbnail');
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            changeMainImage(this);
+        });
+    });
+});
+
 // グローバル関数として定義
 window.showModelPreview = showModelPreview;
