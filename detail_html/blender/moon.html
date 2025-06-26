@@ -3,46 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three.js 3Dモデルビューア</title>
+    <title>3D作品ポートフォリオ</title>
     <link rel="stylesheet" href="blender.css">
+    <script type="importmap">
+    {
+        "imports": {
+        "three": "https://unpkg.com/three@v0.151.3/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@v0.151.3/examples/jsm/"
+        }
+    }
+    </script>
+
 </head>
 <body>
     <div id="container">
-        <div id="controls">
-            <h3>Portfolio 3D Models</h3>
-            <div id="model-selector">
-                <label>作品を選択:</label>
-                <select id="model-select">
-                    <option value="">-- 作品を選択 --</option>
-                </select>
+        <div id="canvas-container"></div>
+        
+        <div id="ui-panel">
+            <h1>3D作品ポートフォリオ</h1>
+            
+            <div class="artwork-grid" id="artwork-grid">
+                <!-- 作品カードはJavaScriptで動的生成 -->
             </div>
-            <div id="model-info">
-                <h4 id="model-title">作品名</h4>
-                <p id="model-description">作品の説明がここに表示されます</p>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <label class="control-label">回転速度</label>
+                    <input type="range" class="control-slider" id="rotation-speed" min="0" max="2" step="0.1" value="1">
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">ズーム</label>
+                    <input type="range" class="control-slider" id="zoom" min="2" max="10" step="0.5" value="5">
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">光の強度</label>
+                    <input type="range" class="control-slider" id="light-intensity" min="0.5" max="3" step="0.1" value="1.5">
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">環境光</label>
+                    <input type="range" class="control-slider" id="ambient-light" min="0" max="1" step="0.1" value="0.4">
+                </div>
             </div>
-            <div>
-                <button id="reset-camera">カメラリセット</button>
-                <button id="toggle-wireframe">ワイヤーフレーム</button>
-                <button id="auto-rotate">自動回転</button>
+            
+            <div class="model-info">
+                <button id="reset-position" class="control-button">位置リセット</button>
+                <button id="auto-rotate" class="control-button">自動回転切替</button>
             </div>
-            <div>
-                <label>ライトの強さ: <input type="range" id="light-intensity" min="0" max="3" step="0.1" value="1"></label>
+        </div>
+        
+        <div class="info-panel">
+            <div id="artwork-info">
+                <strong>作品を選択してください</strong><br>
+                GLBファイルを読み込んで表示します
             </div>
-            <div>
-                <input type="file" id="file-input" accept=".gltf,.glb" style="display: none;" />
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="loader"></div>
+            <p>モデルを読み込み中...</p>
+        </div>
+        
+        <div class="error-panel" id="error-panel">
+            <div class="error-content">
+                <h3>エラーが発生しました</h3>
+                <p id="error-message"></p>
+                <button id="close-error">閉じる</button>
             </div>
-        </div>               
-        <div id="info">
-            <div>操作方法:</div>
-            <div>• マウスドラッグ: 回転</div>
-            <div>• ホイール: ズーム</div>
-            <div>• Right-click + ドラッグ: パン</div>
-            <li><a href="/index.html#top">TOP</a></li>
-            <li><a href="/index.html#works">Works</a></li>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="blender.js"></script>
+<script type="module" src="blender.js"></script>
+
 </body>
 </html>
