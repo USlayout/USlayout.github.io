@@ -117,7 +117,7 @@
                         </div>
                     </div>
 
-                    <a href="#" class="project-card">
+                    <div class="project-card" onclick="openModal('dsicord_bot1')">
                         <div class="project-image">
                             <img src="img/ihuri-to_1.png" alt="apiを用いた天気お知らせDiscord Bot" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                             <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; background:linear-gradient(45deg, #f0f0f0, #e0e0e0);">
@@ -133,11 +133,11 @@
                                 <li>Discord</li>
                             </ul>
                         </div>
-                    </a>
+                    </div>
 
                     <a href="#" class="project-card">
                         <div class="project-image">
-                            <img src="img/black_1.png" alt="ブラックドラゴン" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <img src="img/black_1.png" alt="VRゲーム制作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                             <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; background:linear-gradient(45deg, #f0f0f0, #e0e0e0);">
                                 Black Dragon Model
                             </div>
@@ -666,6 +666,55 @@
         </div>
     </div>
 
+    <div id="dsicord_bot1" class="modal" onclick="closeModal('dsicord_bot1')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('dsicord_bot1')">&times;</button>
+            
+            <div class="modal-header">
+                <h2>天気通知bot</h2>
+                <div class="modal-duration">制作中</div>
+            </div>        
+            <div class="modal-body">
+                <div class="modal-image-section">
+                    <img src="img/no_image.png" alt="no_image" class="modal-main-image">
+                    <div class="modal-image-gallery">
+                        <img src="img/no_image.png" alt="1" class="modal-thumbnail active">
+                    </div>
+                </div>
+                <div class="modal-info-section">
+                    <div class="modal-description">
+                        <h3>プロジェクト概要</h3>
+                        <p>discordのbot機能を活用し天気をお知らせするbotです。</p>
+                        
+                        <h3>制作のポイント</h3>
+                        <ul>
+                            <li>apiの無料枠の中でうまく活用すること</li>
+                            <li>一定時間になったら通知をするようにした</li>
+                            <li>場所を複数登録できるようにした</li>
+                            <li>/コマンドで天気を通知できるようにした</li>
+                        </ul>
+                        
+                        <h3>使用ツール・技術</h3>
+                        <div class="modal-tech-tags">
+                            <span class="tech-tag">discord bot</span>
+                            <span class="tech-tag">python</span>
+                        </div>
+                        
+                        <h3>制作工程</h3>
+                        <ol>
+                            <li>仕様策定</li>
+                            <li>構築</li>
+                        </ol>
+
+                        <h3>改善点</h3>
+                        <ul>
+                            <li>常時起動できるサーバーPCを用意しずっと使えるようにする</li>
+                            <li>地点の登録、通知時間を簡単に登録できるようにする。</li>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- 画像拡大表示用 -->
     <div id="imageFullscreen" class="image-fullscreen" onclick="closeImageFullscreen()">
         <img id="fullscreenImage" src="" alt="">
