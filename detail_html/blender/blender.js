@@ -29,6 +29,12 @@ const artworks = [
         title: 'サンプル作品2',
         description: '2つ目のモデルファイル',
         path: 'model/test2.glb'  // ← ここにあなたのGLBファイルのパスを入力
+    },
+    {
+        id: 'moon',
+        title: '月の模型',
+        description: '月の詳細な3Dモデル',
+        path: 'model/moon.glb'  // ← ここにあなたのGLBファイルのパスを入力
     }
     // 作品を追加する場合は、ここに同じ形式で追加してください
 ];
