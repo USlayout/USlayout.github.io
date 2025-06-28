@@ -35,6 +35,12 @@ const artworks = [
         title: '月の模型',
         description: '月の詳細な3Dモデル',
         path: 'model/moon.glb'  // ← ここにあなたのGLBファイルのパスを入力
+    },
+    {
+        id: 'dragon',
+        title: 'ドラゴンの彫刻',
+        description: 'ドラゴンの精巧な彫刻',
+        path: 'model/dragon.glb'  // ← ここにあなたのGLBファイルのパスを入力
     }
     // 作品を追加する場合は、ここに同じ形式で追加してください
 ];
