@@ -59,10 +59,10 @@
                 <h2 class="section-title">Works</h2>
                 <div class="portfolio-grid">
                     <!-- Unity Game -->
-                     <!-- 
+
                     <div class="project-card" onclick="openModal('cloud')">
                         <div class="project-image">
-                            <div class="in-progress">制作中</div>
+                            <div class="in-progress">制作中/共同制作</div>
                             <img src="img/no_image.png" alt="クラウドストレージ" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                             <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; background:linear-gradient(45deg, #f0f0f0, #e0e0e0);">
                                 仕様策定中
@@ -98,7 +98,7 @@
                                 <li>Kotlin</li>
                             </ul>
                         </div>
-                    </div> -->
+                    </div>
                     <!-- 3D Models --> 
                     <div class="project-card" onclick="openModal('UsefullDevice')">
                         <div class="project-image">
@@ -135,24 +135,25 @@
                         </div>
                     </div>
 
-                    <a href="#" class="project-card">
+                    <div class="project-card" onclick="openModal('VR_game')">
                         <div class="project-image">
-                            <img src="img/black_1.png" alt="VRゲーム制作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="in-progress">共同制作</div>
+                            <img src="img/vrgame2.png" alt="VRゲーム制作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                             <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; background:linear-gradient(45deg, #f0f0f0, #e0e0e0);">
-                                Black Dragon Model
+                                VRバトミントン
                             </div>
                         </div>
                         <div class="project-content">
-                            <h3 class="project-title">ブラックドラゴン</h3>
-                            <div class="project-duration">制作期間：2日</div>
-                            <p class="project-description">3Dプリント用フィギュアモデル。精密なスカルプト技術で制作。</p>
+                            <h3 class="project-title">VRバトミントン</h3>
+                            <div class="project-duration">制作期間：3ヶ月</div>
+                            <p class="project-description">Unreal Engine5を活用してVR対戦バトミントンゲームです。</p>
                             <ul class="project-tags">
                                 <li>Blender</li>
-                                <li>3Dプリント</li>
-                                <li>スカルプト</li>
+                                <li>Unreal Engine5</li>
+                                <li>Meta Quest2</li>
                             </ul>
                         </div>
-                    </a>
+                    </div>
 
                     <!-- Engineering Projects -->
                     <a href="#" class="project-card">
@@ -565,7 +566,7 @@
             <button class="modal-close" onclick="closeModal('android')">&times;</button>
             
             <div class="modal-header">
-                <h2>アヒルパーカマン</h2>
+                <h2>あああああ</h2>
                 <div class="modal-duration">制作期間：1週間</div>
             </div>
             
@@ -715,6 +716,60 @@
             </div>
         </div>
     </div>
+
+    <div id="VR_game" class="modal" onclick="closeModal('VR_game')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('VR_game')">&times;</button>
+            
+            <div class="modal-header">
+                <h2>VRバトミントン</h2>
+                <div class="modal-duration"></div>
+            </div>        
+            <div class="modal-body">
+                <div class="modal-image-section">
+                    <img src="img/vrgame2.png" alt="no_image" class="modal-main-image">
+                    <div class="modal-image-gallery">
+                        <img src="img/vrgame1.png" alt="1" class="modal-thumbnail active">
+                        <img src="img/vrgame2.png" alt="2" class="modal-thumbnail">
+                    </div>
+                </div>
+                <div class="modal-info-section">
+                    <div class="modal-description">
+                        <h3>プロジェクト概要</h3>
+                        <p>Meta Quest2 2台を活用してバトミントンをプレイするゲームです。</p>
+                        
+                        <h3>制作のポイント</h3>
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        
+                        <h3>使用ツール・技術</h3>
+                        <div class="modal-tech-tags">
+                            <span class="tech-tag">Unreal Engine5</span>
+                            <span class="tech-tag">blender</span>
+                            <span class="tech-tag">Meta Quest2</span>
+                            <span class="tech-tag">C++/ブループリント</span>
+                        </div>
+                        
+                        <h3>制作工程</h3>
+                        <ol>
+                            <li>仕様策定</li>
+                            <li>構築</li>
+                        </ol>
+
+                        <h3>改善点</h3>
+                        <ul>
+                            <li>常時起動できるサーバーPCを用意しずっと使えるようにする</li>
+                            <li>地点の登録、通知時間を簡単に登録できるようにする。</li>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 画像拡大表示用 -->
     <div id="imageFullscreen" class="image-fullscreen" onclick="closeImageFullscreen()">
         <img id="fullscreenImage" src="" alt="">
