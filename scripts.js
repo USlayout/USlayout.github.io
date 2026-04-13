@@ -59,7 +59,7 @@ document.querySelectorAll('.model-link').forEach(link => {
 });
 
 // モーダル機能
-function openModal(modalId) {
+window.openModal = function(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
         modal.classList.add('show');
@@ -67,7 +67,7 @@ function openModal(modalId) {
     }
 }
 
-function closeModal(modalId) {
+window.closeModal = function(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
         modal.classList.remove('show');
@@ -76,7 +76,7 @@ function closeModal(modalId) {
 }
 
 // サムネイル画像クリック機能
-function changeMainImage(thumbnailElement, mainImageId) {
+window.changeMainImage = function(thumbnailElement, mainImageId) {
     const mainImage = document.getElementById(mainImageId) || 
                      document.querySelector('.modal-main-image');
     
@@ -93,7 +93,7 @@ function changeMainImage(thumbnailElement, mainImageId) {
 }
 
 // モデルダウンロード機能（仮実装）
-function downloadModel() {
+window.downloadModel = function() {
     alert('モデルファイルのダウンロード機能は準備中です。');
     // 実際にはここでファイルダウンロード処理を実装
 }

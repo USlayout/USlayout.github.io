@@ -201,11 +201,16 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-decoration: none;
             color: inherit;
+            cursor: pointer;
         }
 
         .project-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
         }
 
         .project-image {
@@ -380,62 +385,40 @@
             margin: 0;
         }
 
-        .skill-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-
-        .skill-item:last-child {
-            border-bottom: none;
-        }
-
-        .skill-item:hover {
-            background: rgba(37, 99, 235, 0.02);
-            margin: 0 -1rem;
-            padding: 1rem;
-            border-radius: 8px;
-        }
-
-        .skill-name {
-            font-weight: 500;
+        .skill-category .skill-list .skill-item {
+            display: list-item;
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            list-style-type: disc;
             color: var(--text-dark);
-            font-size: 0.95rem;
-        }
-
-        .skill-level {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .skill-dots {
-            display: flex;
-            gap: 3px;
-        }
-
-        .skill-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--border-color);
-            transition: all 0.3s ease;
-        }
-
-        .skill-dot.active {
-            background: var(--primary-color);
-            transform: scale(1.2);
-        }
-
-        .skill-percentage {
-            font-size: 0.8rem;
-            color: var(--text-light);
             font-weight: 500;
-            min-width: 35px;
-            text-align: right;
+            transition: all 0.3s ease;
+            line-height: 1.5;
+        }
+
+        .skill-category .skill-list .skill-item:hover {
+            color: var(--primary-color);
+            transform: translateX(0.25rem);
+        }
+
+        .skill-category .skill-list .skill-item .skill-name {
+            display: none;
+        }
+
+        .skill-category .skill-list .skill-item .skill-level {
+            display: none;
+        }
+
+        .skill-category .skill-list .skill-item .skill-level .skill-dots {
+            display: none;
+        }
+
+        .skill-category .skill-list .skill-item .skill-level .skill-dot {
+            display: none;
+        }
+
+        .skill-category .skill-list .skill-item .skill-level .skill-percentage {
+            display: none;
         }
 
         /* プログレスバー版（オプション） */
@@ -461,21 +444,7 @@
             animation: fillProgress 1.5s ease-in-out;
         }
 
-        @keyframes fillProgress {
-            from { width: 0; }
-        }
-
-        /* 特別なスキルカテゴリのスタイル */
-        .skill-category.featured {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.02), rgba(30, 64, 175, 0.02));
-            border: 2px solid var(--primary-color);
-        }
-
-        .skill-category.featured .skill-icon {
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-        }
-
-        /* フッター */
+        /* スキルレベルのアニメーション */
         .footer {
             background: var(--text-dark);
             color: white;
