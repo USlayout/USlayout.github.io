@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="サーバー仮想化技術とコンテナ技術の性能比較に関する研究記録。">
+  <title>研究ノート | 卒業研究</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/style.css">
+  <script src="../static/js/script.js" defer></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="研究ノート ホーム">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span><strong>研究ノート</strong><small>GRADUATION RESEARCH · Gr03</small></span>
+      </a>
+      <span class="header-note"><span class="status-dot"></span> 研究の記録</span>
+    </header>
+
+    <main class="page-grid">
+      <section class="main-column" aria-label="最新の研究経過報告">
+        <div class="eyebrow"><span class="eyebrow-line"></span> RESEARCH JOURNAL <span class="eyebrow-line"></span></div>
+        <h1>研究の記録</h1>
+        <p class="page-intro">サーバー仮想化とコンテナ技術の性能を比較し、実験の進捗と気づきを記録しています。</p>
+
+        <article class="report-card">
+          <div class="report-topline"><span class="pill"><span class="pill-dot"></span> 最新の研究経過報告</span><time datetime="2026-05-15">2026.05.15</time></div>
+          <h2>仮想化とコンテナの性能比較に向けて</h2>
+          <p class="report-lead">先行研究を整理し、CPU・メモリ・ストレージ・ネットワークの性能差が生まれる理由と、比較時にそろえる条件をまとめました。</p>
+          <div class="topic-grid">
+            <section class="topic-card"><span class="topic-number">01</span><h3>CPU</h3><p>KVMは仮想CPUの管理に伴う切り替えが発生します。Dockerはホストのカーネルを共有するため、処理のオーバーヘッドが小さいとされています。</p></section>
+            <section class="topic-card"><span class="topic-number">02</span><h3>メモリ</h3><p>VMはゲストOSごとにメモリを必要とします。DockerはOSを共有するため、メモリ効率の面で有利と考えられます。</p></section>
+            <section class="topic-card"><span class="topic-number">03</span><h3>ストレージ</h3><p>仮想ディスクを経由するKVMと、ホストストレージに近い形でアクセスするDockerを同じ条件で測定します。</p></section>
+            <section class="topic-card"><span class="topic-number">04</span><h3>ネットワーク</h3><p>仮想NICやDockerのネットワークモードによる差を確認します。有線LANと同じMTU値を使って比較します。</p></section>
+          </div>
+          <div class="conditions"><div class="conditions-heading"><span class="conditions-icon">✓</span><h3>比較でそろえる条件</h3></div><ul><li>CPUコア数・スレッド数を統一</li><li>同一のベンチマークとストレージを使用</li><li>メモリ割り当て・スワップ条件を統一</li><li>有線LANと同じMTU値を使用</li></ul></div>
+          <a class="article-link" href="rpr/rpr_2026-05-15.html">研究経過報告書を読む <span aria-hidden="true">→</span></a>
+        </article>
+
+        <section class="next-card"><div class="next-icon" aria-hidden="true">↗</div><div><span class="section-kicker">NEXT EXPERIMENT</span><h2>これからの計画</h2><p>Linux環境に比較対象を構築し、4つの分野で測定を進めます。</p><a href="ep/ep_2026-07-01.html">実験計画書を見る <span aria-hidden="true">→</span></a></div></section>
+
+        <section class="checklist" aria-labelledby="checklist-title">
+          <div class="checklist-header"><div><span class="section-kicker">RESEARCH CHECKLIST</span><h2 id="checklist-title">ここまでにできたこと</h2></div><span class="progress-count" aria-live="polite"><strong data-progress>0</strong> / <span data-total>5</span></span></div>
+          <p class="checklist-intro">チェックした項目はこのブラウザーに保存されます。</p>
+          <div class="checklist-items">
+            <label class="check-item"><input type="checkbox" data-task="literature" checked><span class="custom-check" aria-hidden="true"></span><span>先行研究を調べ、性能差の要因を整理した</span></label>
+            <label class="check-item"><input type="checkbox" data-task="conditions" checked><span class="custom-check" aria-hidden="true"></span><span>各環境の比較条件を決めた</span></label>
+            <label class="check-item"><input type="checkbox" data-task="host" checked><span class="custom-check" aria-hidden="true"></span><span>ホストOSで測定する計画を立てた</span></label>
+            <label class="check-item"><input type="checkbox" data-task="automation"><span class="custom-check" aria-hidden="true"></span><span>測定を自動化するスクリプトを作成する</span></label>
+            <label class="check-item"><input type="checkbox" data-task="analysis"><span class="custom-check" aria-hidden="true"></span><span>測定結果をグラフ化して分析する</span></label>
+          </div>
+        </section>
+        <footer class="site-footer">卒業研究の記録 <span>·</span> Gr03</footer>
+      </section>
+
+      <aside class="sidebar" aria-label="報告書一覧">
+        <div class="sidebar-sticky">
+          <div class="sidebar-heading"><span class="sidebar-heading-mark"></span><div><span class="section-kicker">ARCHIVE</span><h2>レポート一覧</h2></div></div>
+          <section class="archive-group"><div class="archive-title"><span class="archive-icon report-icon" aria-hidden="true">▤</span><h3>研究経過報告書</h3><span class="archive-count">01</span></div><a class="archive-link is-current" href="rpr/rpr_2026-05-15.html"><span class="archive-date">2026.05.15</span><span class="archive-label">先行研究と比較条件の整理</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section>
+          <section class="archive-group"><div class="archive-title"><span class="archive-icon plan-icon" aria-hidden="true">⌑</span><h3>実験計画書</h3><span class="archive-count">01</span></div><a class="archive-link" href="ep/ep_2026-07-01.html"><span class="archive-date">2026.07.01</span><span class="archive-label">ホストOSでの性能測定</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section>
+          <div class="sidebar-note"><span>✳</span><p>小さな実験を積み重ねて、結果を記録していきます。</p></div>
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>

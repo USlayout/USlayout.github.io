@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="KVMとDockerの性能比較に向けたホストOSでの実験計画。">
+  <title>2026年7月1日 実験計画書 | 研究ノート</title>
+  <link rel="stylesheet" href="../../static/css/style.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>研究ノート</strong><small>GRADUATION RESEARCH · Gr03</small></span></a><span class="header-note"><span class="status-dot"></span> 研究の記録</span></header>
+    <main class="page-grid article-layout">
+      <section class="main-column">
+        <a class="back-link" href="../index.html">← トップページへ戻る</a>
+        <article class="article-paper">
+          <div class="article-date"><time datetime="2026-07-01">2026.07.01</time> · EXPERIMENTAL PLAN</div>
+          <h1>実験計画書</h1>
+          <p class="article-subtitle">ホストOSでの性能測定</p>
+          <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>氏名：</strong>大槻 雅宜・添野 真之介</span></div>
+          <section class="article-section"><h2>1. 実験の目的</h2><p>KVMとDockerの性能を定量的に比較・分析し、それぞれの特性と適用条件を明らかにします。CPU・メモリ・ストレージ・ネットワーク性能の差、CPUアフィニティやCPU割り当ての影響を調べ、用途に応じた選定指針を検討します。</p></section>
+          <section class="article-section"><h2>2. 実験環境</h2><h3>2-1. ホストOS</h3><ul><li>OS：Ubuntu Server 26.04 LTS（Resolute Raccoon）</li><li>カーネル：GNU/Linux 7.00-27-generic</li><li>アーキテクチャ：x86_64（amd64）</li></ul><p>Ubuntu 26.04.1公開後には同一手順で再実験し、結果の再現性を確認します。</p><h3>2-2. 比較対象</h3><div class="article-table-wrap"><table class="article-table"><thead><tr><th>環境</th><th>構成概要</th></tr></thead><tbody><tr><td>A：ホストOS</td><td>ホストOS上で直接ベンチマークを実行する比較基準</td></tr><tr><td>B：VM単体</td><td>KVM上の仮想マシン内で実行</td></tr><tr><td>C：Docker単体</td><td>ホストOS上のDockerコンテナ内で実行</td></tr><tr><td>D：VM上Docker</td><td>KVMの仮想マシン内でDockerコンテナを実行</td></tr></tbody></table></div></section>
+          <section class="article-section"><h2>3. 測定ツールと測定項目</h2><div class="article-table-wrap"><table class="article-table"><thead><tr><th>測定項目</th><th>ツール</th><th>主な指標</th><th>実行例</th></tr></thead><tbody><tr><td>CPU性能</td><td>SysBench</td><td>演算速度・スループット</td><td><code>sysbench cpu --threads=4 --time=30 run</code></td></tr><tr><td>メモリ性能</td><td>SysBench</td><td>帯域幅・レイテンシ</td><td><code>sysbench memory --memory-total-size=10G run</code></td></tr><tr><td>ストレージI/O</td><td>fio</td><td>IOPS・スループット・レイテンシ</td><td><code>fio --rw=randread --bs=4k --direct=1 ...</code></td></tr><tr><td>ネットワーク</td><td>iperf3</td><td>TCP/UDPスループット・ジッタ</td><td><code>iperf3 -c &lt;IP&gt; -t 10 -P 4 --json</code></td></tr></tbody></table></div></section>
+          <section class="article-section"><h2>4. ホストOSでのベンチマーク手順</h2><ol><li>ホストOSでベンチマークを実行する自動化スクリプトを作成する。</li><li>完成したスクリプトを10回実行し、結果を保存する。</li><li>測定データに明らかな異常がないか確認する。</li><li>問題がなければグラフ化し、結果を整理する。</li></ol></section>
+          <section class="article-section"><h2>5. 分析の方針</h2><p>各環境で同じツールと条件を使い、CPU・メモリ・ストレージ・ネットワークの測定結果を比較します。測定のばらつきや環境構成を記録し、CPUアフィニティやCPU割り当て方法による変化も分析します。</p></section>
+          <div class="article-end">実験計画書 · 2026年7月1日 · Gr03</div>
+        </article>
+      </section>
+      <aside class="sidebar" aria-label="報告書一覧"><div class="sidebar-sticky"><div class="sidebar-heading"><span class="sidebar-heading-mark"></span><div><span class="section-kicker">ARCHIVE</span><h2>レポート一覧</h2></div></div><section class="archive-group"><div class="archive-title"><span class="archive-icon report-icon" aria-hidden="true">▤</span><h3>研究経過報告書</h3><span class="archive-count">01</span></div><a class="archive-link" href="../rpr/rpr_2026-05-15.html"><span class="archive-date">2026.05.15</span><span class="archive-label">先行研究と比較条件の整理</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section><section class="archive-group"><div class="archive-title"><span class="archive-icon plan-icon" aria-hidden="true">⌑</span><h3>実験計画書</h3><span class="archive-count">01</span></div><a class="archive-link is-current" href="ep_2026-07-01.html" aria-current="page"><span class="archive-date">2026.07.01</span><span class="archive-label">ホストOSでの性能測定</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section><div class="sidebar-note"><span>✳</span><p>小さな実験を積み重ねて、結果を記録していきます。</p></div></div></aside>
+    </main>
+  </div>
+</body>
+</html>
