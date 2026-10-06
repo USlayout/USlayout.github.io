@@ -17,7 +17,7 @@
           <div class="article-date"><time datetime="2026-05-15">2026.05.15</time> · RESEARCH PROGRESS REPORT</div>
           <h1>研究経過報告書</h1>
           <p class="article-subtitle">仮想化とコンテナの性能比較に向けて</p>
-          <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>氏名：</strong>大槻 雅宜・添野 真之介</span></div>
+          <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>学籍番号・氏名：</strong>123D024 大槻 雅宜</span><span><strong>学籍番号・氏名：</strong>123D075 添野 真之介</span></div>
           <section class="article-section"><h2>研究テーマ</h2><p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究</p></section>
           <section class="article-section"><h2>進捗状況</h2><p>先行研究などをもとに、仮想化環境でオーバーヘッドが発生する理由と、各性能項目の比較条件を整理しました。</p>
             <h3>CPU性能</h3><p>KVMでは仮想マシンごとに仮想CPU（vCPU）を管理するため、ホストOSとゲストOS間の処理切り替えが発生します。一方、DockerはホストOSのカーネルを共有し、通常のプロセスとして動作するため、オーバーヘッドが小さいとされています。IBMの比較研究でも、コンテナのCPU性能はネイティブ環境に近い結果が報告されています。</p><p><strong>比較条件：</strong>CPUコア数・スレッド数を統一し、Turbo Boostと省電力機能を無効化したうえで同じベンチマークを使用します。</p>
