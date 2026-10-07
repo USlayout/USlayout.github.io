@@ -12,20 +12,34 @@
   <!-- このファイルは公開用ではありません。複製し、templates/rpr/rpr_YYYY-MM-DD.html として保存してください。 -->
   <div class="site-shell">
     <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>卒業研究</strong><small>GRADUATION RESEARCH · Gr03</small></span></a></header>
-    <main class="page-grid article-layout">
-      <section class="main-column">
+    <br class="page-grid article-layout">
+      <br class="main-column">
         <a class="back-link" href="../index.html">← トップページへ戻る</a>
-        <article class="article-paper">
-          <div class="article-date">YYYY.MM.DD</div>
+        <br class="article-paper">
+          <div class="article-date">2026.05.08</div>
           <h1>研究経過報告書</h1>
           <p class="article-subtitle">報告タイトルを入力</p>
           <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>学籍番号・氏名：</strong>123D024 大槻  雅宜 </span><span><strong>学籍番号・氏名：</strong>123D075 添野真之介 </span></div>
           <section class="article-section"><h2>研究テーマ</h2><p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究 </p></section>
-          <section class="article-section"><h2>進捗状況</h2><p>現時点では大きな進捗はないが、次回に向けて仮想環境のテストを行う予定である。 
+          <section class="article-section"><h2>進捗状況</h2><p>CPU・メモリ・ストレージ・ネットワークの各ハードウェア資源に対し、KVMとDockerで利用方法が異なる点に着目して比較を行う。<br><strong>CPU</strong></br>
+          <br>KVMはCPUの仮想化支援機能（VT-x / AMD-V）を利用してvCPUを提供するため、仮想化処理によるオーバーヘッドが発生する。一方、DockerはホストOSのCPUスケジューラを直接利用するため、オーバーヘッドは小さい。比較ではCPUコア数を統一し、CPUクロック変動機能の影響を抑える必要がある。
 
-具体的には、DockerおよびKVMの導入を検討しており、今後の研究に必要なソフトウェアや環境について精査し、整理する段階にある。 </p></section>
-          <section class="article-section"><h2>今後の計画</h2><ul><li>次に行う作業を記入</li><li>確認・分析する内容を記入</li></ul></section>
-          <section class="article-section"><h2>参考文献</h2><ol class="reference-list"><li>著者・機関名、資料名、URL、閲覧日を記入</li></ol></section>
+<br><strong>メモリ</strong></br> 
+
+KVMではゲストOS分のメモリ消費が追加で発生するが、Dockerはホストカーネルを共有するためメモリ効率が高い。公平な比較のため、両者に同一容量を割り当て、スワップ発生を防ぐ必要がある。 
+
+
+
+<br><strong>ストレージ</strong></br> 
+
+KVMは仮想ディスクを介してI/Oを行うため、アクセス経路が増え遅延が発生しやすい。一方、Dockerはホストストレージに近い形でアクセスできるため、I/O性能が高い傾向がある。正確な比較のため、高速なSSDを使用する。 
+
+<br><strong>ネットワーク</strong></br> 
+
+KVMは仮想NICを経由するため通信処理にオーバーヘッドが生じる。Dockerもネットワークモードにより性能が変化するため、比較時は通信方式を統一する必要がある。また、測定誤差を抑えるため有線環境を使用する。 
+</p></section>
+          <section class="article-section"><h2>今後の計画</h2><ul><li>環境構築を行う</li><li>デフォルト設定におけるベンチマーク測定を実施する</li><li>各種設定を調整しながらパフォーマンスの変化を確認する </li><li>上記の試行を複数回繰り返し、結果を比較して要因を整理する</li></ul></section>
+          <section class="article-section"><h2>参考文献</h2><ol class="reference-list"><li>なし</li></ol></section>
           <div class="article-end">研究経過報告書 · Gr03</div>
         </article>
       </section>
