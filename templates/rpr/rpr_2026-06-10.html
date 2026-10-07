@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="研究経過報告書のテンプレートです。日付と本文を更新して使用してください。">
+  <title>研究経過報告書 | 卒業研究</title>
+  <link rel="stylesheet" href="../../static/css/style.css">
+</head>
+<body>
+  <!-- このファイルは公開用ではありません。複製し、templates/rpr/rpr_YYYY-MM-DD.html として保存してください。 -->
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span><strong>卒業研究</strong><small>GRADUATION RESEARCH · Gr03</small></span>
+      </a>
+    </header>
+    <main class="page-grid article-layout">
+      <section class="main-column">
+        <a class="back-link" href="../index.html">← トップページへ戻る</a>
+        <article class="article-paper">
+          <div class="article-date">2026.06.10</div>
+          <h1>研究経過報告書</h1>
+          <p class="article-subtitle">報告タイトルを入力</p>
+          <div class="article-meta">
+            <span><strong>グループ：</strong>Gr03</span>
+            <span><strong>学籍番号・氏名：</strong>123D024 大槻 雅宜</span>
+            <span><strong>学籍番号・氏名：</strong>123D075 添野 真之介</span>
+          </div>
+          <section class="article-section">
+            <h2>研究テーマ</h2>
+            <p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究</p>
+          </section>
+          <section class="article-section">
+            <h2>進捗状況</h2>
+            <h3>論文調査</h3>
+            <p>VM上でDockerを動作させる環境に関する論文を見つけたため、概要と結論をまとめました。詳細については、後日さらに読み進めて整理する予定です。</p>
+            <p><em>Experimental Assessment of Containers Running on Top of Virtual Machines</em>（仮想マシン上で動作するコンテナの実験的評価）を対象としました。</p>
+
+            <h3>概要</h3>
+            <p>クラウド環境では、KVM、Xen、VirtualBoxなどの仮想マシンや、Docker、Podman、LXCなどのコンテナが広く利用されています。本論文では、これらの実行環境を比較し、コンテナを仮想マシン上で動作させた場合の性能を評価しています。</p>
+
+            <h3>比較対象</h3>
+            <p>以下の環境を含む、複数の組み合わせによる12種類の構成を作成して比較しています。</p>
+            <ul>
+              <li>仮想マシン</li>
+              <li>コンテナ</li>
+              <li>仮想マシン上のコンテナ</li>
+            </ul>
+
+            <h3>評価項目</h3>
+            <p>以下のリソース性能をベンチマークで測定しています。</p>
+            <ul>
+              <li>CPU</li>
+              <li>メモリ</li>
+              <li>ディスクI/O</li>
+              <li>ネットワーク</li>
+              <li>MySQL（実アプリケーション）</li>
+            </ul>
+
+            <h3>主な結果</h3>
+            <h3>1. コンテナはVMよりオーバーヘッドが小さい</h3>
+            <p>単独実行では、コンテナの方が仮想マシンより軽量で、高い性能を示しました。コンテナはホストOSのカーネルを共有するため、仮想化によるコストが小さいことが確認されました。</p>
+
+            <h3>2. CPU・メモリ性能</h3>
+            <p>比較したコンテナ技術の中では、PodmanがCPU性能およびメモリ性能で最も良い結果を示しました。</p>
+
+            <h3>3. ネットワーク性能</h3>
+            <p>ネットワークベンチマークでは、Dockerが最も高い性能を示しました。</p>
+
+            <h3>4. VM上のコンテナでも十分実用的</h3>
+            <p>「コンテナ＋VM」の二重仮想化構成でも性能低下は比較的小さく、用途によっては十分に実用的であることが確認されました。</p>
+
+            <h3>まとめ</h3>
+            <ul>
+              <li>コンテナはVMより軽量で、CPU・メモリ・ネットワーク性能が高い</li>
+              <li>VM上でコンテナを動かしても性能低下は比較的小さく、クラウド環境で十分実用的である</li>
+              <li>「Container on VM」は性能と隔離性を両立できる有効な構成である</li>
+            </ul>
+          </section>
+          <section class="article-section">
+            <h2>今後の計画</h2>
+            <ul>
+              <li>Linux環境にKVMとDockerを構築する</li>
+              <li>VM単体、Docker単体、VM上Dockerの3環境を比較する</li>
+              <li>CPU、メモリ、ストレージ、ネットワーク性能を測定する</li>
+              <li>CPUアフィニティ設定による性能変化を確認する</li>
+              <li>ベンチマーク結果をグラフ化し、性能差の要因を分析する</li>
+            </ul>
+          </section>
+          <section class="article-section">
+            <h2>参考文献</h2>
+            <ol class="reference-list">
+              <li>
+                <em>Experimental Assessment of Containers Running on Top of Virtual Machines</em>.
+                Hossein Aqasizade, Ehsan Ataie, Mostafa Bastam,
+                <em>IET Networks</em>, vol. 14, no. 1, e12138, 2025.
+                <a href="https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/ntw2.12138">論文ページ</a>
+              </li>
+            </ol>
+          </section>
+          <div class="article-end">研究経過報告書 · Gr03</div>
+        </article>
+      </section>
+      <aside class="sidebar" aria-label="報告書一覧">
+        <div class="sidebar-sticky">
+          <div class="sidebar-heading">
+            <span class="sidebar-heading-mark"></span>
+            <div><span class="section-kicker">ARCHIVE</span><h2>レポート一覧</h2></div>
+          </div>
+          <section class="archive-group">
+            <div class="archive-title"><span class="archive-icon report-icon" aria-hidden="true">▤</span><h3>研究経過報告書</h3></div>
+            <a class="archive-link" href="rpr_YYYY-MM-DD.html">
+              <span class="archive-date">YYYY.MM.DD</span><span class="archive-label">報告タイトル</span><span class="archive-arrow" aria-hidden="true">↗</span>
+            </a>
+          </section>
+          <section class="archive-group">
+            <div class="archive-title"><span class="archive-icon plan-icon" aria-hidden="true"></span><h3>実験計画書</h3></div>
+            <a class="archive-link" href="../ep/ep_YYYY-MM-DD.html">
+              <span class="archive-date">YYYY.MM.DD</span><span class="archive-label">実験タイトル</span><span class="archive-arrow" aria-hidden="true">↗</span>
+            </a>
+          </section>
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
+    
