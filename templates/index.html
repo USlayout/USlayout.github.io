@@ -27,21 +27,23 @@
         <h1>研究の記録</h1>
         <p class="page-intro">サーバー仮想化とコンテナ技術の性能を比較し、実験の進捗と気づきを記録しています。</p>
 
-        <article class="report-card">
-          <div class="report-topline"><span class="pill"><span class="pill-dot"></span> 最新の研究経過報告</span><time datetime="2026-05-15">2026.05.15</time></div>
-          <h2>仮想化とコンテナの性能比較に向けて</h2>
-          <p class="report-lead">先行研究を整理し、CPU・メモリ・ストレージ・ネットワークの性能差が生まれる理由と、比較時にそろえる条件をまとめました。</p>
-          <div class="topic-grid">
-            <section class="topic-card"><span class="topic-number">01</span><h3>CPU</h3><p>KVMは仮想CPUの管理に伴う切り替えが発生します。Dockerはホストのカーネルを共有するため、処理のオーバーヘッドが小さいとされています。</p></section>
-            <section class="topic-card"><span class="topic-number">02</span><h3>メモリ</h3><p>VMはゲストOSごとにメモリを必要とします。DockerはOSを共有するため、メモリ効率の面で有利と考えられます。</p></section>
-            <section class="topic-card"><span class="topic-number">03</span><h3>ストレージ</h3><p>仮想ディスクを経由するKVMと、ホストストレージに近い形でアクセスするDockerを同じ条件で測定します。</p></section>
-            <section class="topic-card"><span class="topic-number">04</span><h3>ネットワーク</h3><p>仮想NICやDockerのネットワークモードによる差を確認します。有線LANと同じMTU値を使って比較します。</p></section>
-          </div>
-          <div class="conditions"><div class="conditions-heading"><span class="conditions-icon">✓</span><h3>比較でそろえる条件</h3></div><ul><li>CPUコア数・スレッド数を統一</li><li>同一のベンチマークとストレージを使用</li><li>メモリ割り当て・スワップ条件を統一</li><li>有線LANと同じMTU値を使用</li></ul></div>
-          <a class="article-link" href="rpr/rpr_2026-05-15.html">研究経過報告書を読む <span aria-hidden="true">→</span></a>
+        <article class="article-paper latest-report">
+          <div class="article-date"><time datetime="2026-05-15">2026.05.15</time> · 最新の研究経過報告書</div>
+          <h2>研究経過報告書</h2>
+          <p class="article-subtitle">仮想化とコンテナの性能比較に向けて</p>
+          <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>学籍番号・氏名：</strong>123D024 大槻 雅宜</span><span><strong>学籍番号・氏名：</strong>123D075 添野 真之介</span></div>
+          <section class="article-section"><h2>研究テーマ</h2><p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究</p></section>
+          <section class="article-section"><h2>進捗状況</h2><p>先行研究などをもとに、仮想化環境でオーバーヘッドが発生する理由と、各性能項目の比較条件を整理しました。</p>
+            <h3>CPU性能</h3><p>KVMでは仮想マシンごとに仮想CPU（vCPU）を管理するため、ホストOSとゲストOS間の処理切り替えが発生します。一方、DockerはホストOSのカーネルを共有し、通常のプロセスとして動作するため、オーバーヘッドが小さいとされています。IBMの比較研究でも、コンテナのCPU性能はネイティブ環境に近い結果が報告されています。</p><p><strong>比較条件：</strong>CPUコア数・スレッド数を統一し、Turbo Boostと省電力機能を無効化したうえで同じベンチマークを使用します。</p>
+            <h3>メモリ性能</h3><p>KVMでは各仮想マシンで独立したOSを起動するため、OS分のメモリ消費が追加で発生します。DockerはホストOSのカーネルを共有するため、メモリ効率が高いと考えられます。Red Hatの資料では、仮想環境のゲスト仮想ハードウェア管理に追加リソースが必要と説明されています。</p><p><strong>比較条件：</strong>割り当てメモリ容量をそろえ、スワップを無効化し、不要なバックグラウンドプロセスを停止します。</p>
+            <h3>ストレージ性能</h3><p>KVMは仮想ディスクを経由してアクセスするため、I/O経路が長くなり遅延が発生しやすくなります。Dockerはホストストレージに近い形でアクセスでき、高速な傾向があるとされています。</p><p><strong>比較条件：</strong>同一SSDと同じファイルシステムを使い、キャッシュ状態をそろえます。</p>
+            <h3>ネットワーク性能</h3><p>KVMでは仮想NICを経由することで通信処理にオーバーヘッドが発生します。Dockerもネットワークモードにより性能が変わり、ホスト共有モードでは高性能になる傾向があります。Red Hatの資料でも、仮想NICの設定が性能に影響するとされています。</p><p><strong>比較条件：</strong>同じネットワーク設定、有線LAN、同じMTU値を使います。</p>
+            <p>先行研究ではCPUやメモリなど多くの項目でDockerがKVMより高性能と報告されています。一方、ストレージ性能などではKVMが優位になる条件もあり、用途に応じた使い分けが重要です。</p>
+          </section>
+          <section class="article-section"><h2>今後の計画</h2><ul><li>Linux環境にKVMとDockerを構築する</li><li>VM単体・Docker単体・VM上Dockerの3環境を比較する</li><li>CPU・メモリ・ストレージ・ネットワーク性能を測定する</li><li>Hyper-ThreadingやCPUアフィニティ設定による変化を確認する</li><li>ベンチマーク結果をグラフ化し、性能差の要因を分析する</li></ul><p><a href="ep/ep_2026-07-01.html">実験計画書：ホストOSでの性能測定 →</a></p></section>
+          <section class="article-section"><h2>参考文献</h2><ol class="reference-list"><li>IBM Research, <em>An Updated Performance Comparison of Virtual Machines and Linux Containers</em><br><a href="https://research.ibm.com/publications/an-updated-performance-comparison-of-virtual-machines-and-linux-containers">research.ibm.com — VMとLinuxコンテナの性能比較</a></li><li>Red Hat, <em>Virtualization Tuning and Optimization Guide</em><br><a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html-single/virtualization_tuning_and_optimization_guide/index">docs.redhat.com — 仮想化のチューニングと最適化</a></li><li>Korea University, <em>A Performance Comparison of Linux Containers and Virtual Machines using Docker and KVM</em><br><a href="https://pure.korea.ac.kr/en/publications/a-performance-comparison-of-linux-containers-and-virtual-machines">pure.korea.ac.kr — DockerとKVMの性能比較</a></li><li>arXiv, <em>Performance Overhead Comparison between Hypervisor and Container based Virtualization</em><br><a href="https://arxiv.org/abs/1708.01388">arXiv:1708.01388</a></li><li>arXiv, <em>Performance Exploration of Virtualization Systems</em><br><a href="https://arxiv.org/abs/2103.07092">arXiv:2103.07092</a></li></ol></section>
+          <div class="article-end">研究経過報告書 · 2026年5月15日 · Gr03 · <a href="rpr/rpr_2026-05-15.html">個別ページを開く</a></div>
         </article>
-
-        <section class="next-card"><div class="next-icon" aria-hidden="true">↗</div><div><span class="section-kicker">NEXT EXPERIMENT</span><h2>これからの計画</h2><p>Linux環境に比較対象を構築し、4つの分野で測定を進めます。</p><a href="ep/ep_2026-07-01.html">実験計画書を見る <span aria-hidden="true">→</span></a></div></section>
 
         <section class="checklist" aria-labelledby="checklist-title">
           <div class="checklist-header"><div><span class="section-kicker">RESEARCH CHECKLIST</span><h2 id="checklist-title">ここまでにできたこと</h2></div><span class="progress-count" aria-live="polite"><strong data-progress>0</strong> / <span data-total>5</span></span></div>
@@ -62,6 +64,7 @@
           <div class="sidebar-heading"><span class="sidebar-heading-mark"></span><div><span class="section-kicker">ARCHIVE</span><h2>レポート一覧</h2></div></div>
           <section class="archive-group"><div class="archive-title"><span class="archive-icon report-icon" aria-hidden="true">▤</span><h3>研究経過報告書</h3><span class="archive-count">01</span></div><a class="archive-link is-current" href="rpr/rpr_2026-05-15.html"><span class="archive-date">2026.05.15</span><span class="archive-label">先行研究と比較条件の整理</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section>
           <section class="archive-group"><div class="archive-title"><span class="archive-icon plan-icon" aria-hidden="true">⌑</span><h3>実験計画書</h3><span class="archive-count">01</span></div><a class="archive-link" href="ep/ep_2026-07-01.html"><span class="archive-date">2026.07.01</span><span class="archive-label">ホストOSでの性能測定</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section>
+          <section class="archive-group"><div class="archive-title"><span class="archive-icon report-icon" aria-hidden="true">↗</span><h3>関連ページ</h3></div><a class="archive-link" href="research_paper.html"><span class="archive-label">参考論文リンク集</span><span class="archive-arrow" aria-hidden="true">↗</span></a><a class="archive-link" href="scripts/index.html"><span class="archive-label">実験スクリプト・設定</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section>
           <div class="sidebar-note"><span>✳</span><p>小さな実験を積み重ねて、結果を記録していきます。</p></div>
         </div>
       </aside>
