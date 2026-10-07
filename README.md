@@ -14,6 +14,7 @@ templates/research_paper.html 参考論文リンク集
 templates/rpr/           研究経過報告書（Research Progress Report）
 templates/ep/            実験計画書（Experimental Plan）
 templates/scripts/       実験スクリプトとコード表示ページ
+templates/scripts/archive/ 旧スクリプトの保管場所
 videos/                  動画素材
 ```
 
@@ -32,7 +33,8 @@ videos/                  動画素材
 ## 論文・スクリプトを追加する
 
 - 参考文献は `templates/research_paper.html` の `literature-item` を複製して、タイトル・説明・URLを追加します。
-- `.sh` や `.conf` は `templates/scripts/` に置き、同じページのコード表示カードにファイル名を登録します。コード本文はファイルから読み込み、画面ではテキストとして表示します。
+- 現行の `.sh` や `.conf` は `templates/scripts/` に置き、`templates/scripts/index.html` にコード表示カードを追加します。コード本文はファイルから読み込み、画面ではテキストとして表示します。
+- 古い版は `templates/scripts/archive/` に移し、`templates/scripts/archive/index.html` から閲覧できるようにします。
 
 ## 公開
 

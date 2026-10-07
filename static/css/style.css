@@ -159,6 +159,10 @@ h1 { margin: 11px 0 8px; font-size: 29px; font-weight: 600; letter-spacing: .04e
 .code-window code { display: block; min-width: max-content; color: inherit; font: 11px/1.75 Consolas, "Cascadia Code", "SFMono-Regular", monospace; white-space: pre; }
 .code-message { min-height: 0; margin: 0; padding: 0 18px; color: #b2c7c7; background: #17232e; font-size: 9px; }
 .code-message:not(:empty) { padding-bottom: 12px; }
+.archive-callout { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 26px; padding: 18px 20px; border: 1px solid #e4e9ec; border-radius: 9px; background: #f0f3f4; }
+.archive-callout h2 { margin: 4px 0 3px; font-size: 13px; font-weight: 600; }
+.archive-callout p { margin: 0; color: var(--muted); font-size: 10px; }
+.archive-callout a { flex: 0 0 auto; color: var(--teal-dark); font-size: 10px; font-weight: 600; }
 
 @media (max-width: 900px) {
   .site-shell { padding: 0 30px; }
@@ -185,6 +189,7 @@ h1 { margin: 11px 0 8px; font-size: 29px; font-weight: 600; letter-spacing: .04e
   .code-card-header { align-items: flex-start; }
   .copy-code { margin-top: 3px; }
   .code-window { padding-right: 13px; padding-left: 13px; }
+  .archive-callout { align-items: flex-start; flex-direction: column; }
 }
 @media (max-width: 430px) {
   .topic-grid { grid-template-columns: 1fr; }
