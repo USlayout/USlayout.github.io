@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="KVMとDockerの性能比較実験における全体の流れをまとめた実験計画書。">
+  <title>2026年7月10日 実験計画書 | 研究ノート</title>
+  <link rel="stylesheet" href="../../static/css/style.css">
+  <script src="../../static/js/archive.js" defer></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>研究ノート</strong><small>GRADUATION RESEARCH · Gr03</small></span></a><span class="header-note"><span class="status-dot"></span>研究の記録</span></header>
+    <main class="page-grid article-layout">
+      <section class="main-column">
+        <a class="back-link" href="../index.html">← トップページへ戻る</a>
+        <article class="article-paper">
+          <div class="article-date"><time datetime="2026-07-10">2026.07.10</time> · EXPERIMENT PLAN</div>
+          <h1>実験計画書</h1>
+          <p class="article-subtitle">全体の流れ</p>
+          <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>学籍番号・氏名：</strong>123D024 大槻 雅宜</span><span><strong>学籍番号・氏名：</strong>123D075 添野真之介</span></div>
+
+          <section class="article-section"><h2>1. Ubuntuのインストールおよび初期設定</h2><ul><li>Ubuntu Serverのインストール</li><li>ネットワーク設定</li><li>タイムゾーン設定</li><li>パッケージの更新</li></ul><p>詳細は<a href="https://nitay.sharepoint.com/:w:/r/sites/-202685/_layouts/15/Doc.aspx?action=edit&amp;sourcedoc=%7B976fca89-4f8a-45e2-b18d-233aa73f7eab%7D&amp;wdExp=TEAMS-TREATMENT&amp;web=1&amp;TeamsCID=1ce46fe9-9ab6-4d30-b426-f66e95b49e6b" target="_blank" rel="noopener noreferrer">「実験計画書～OSインストール～」</a>を参照します。</p></section>
+
+          <section class="article-section"><h2>2. 必要なツールのインストール</h2><ul><li>KVM</li><li>Docker</li><li>SysBench</li><li>fio</li><li>iperf3</li><li>その他、実験に必要なツール</li></ul><p>詳細は<a href="https://nitay.sharepoint.com/:w:/r/sites/-202685/_layouts/15/Doc.aspx?action=edit&amp;sourcedoc=%7Be6cfb565-bcfe-426e-8587-e0ec0a17a4c5%7D&amp;wdExp=TEAMS-TREATMENT&amp;web=1&amp;TeamsCID=ff48a779-3416-4fa1-b088-da11938e4db8" target="_blank" rel="noopener noreferrer">「実験計画書～環境準備～」</a>を参照します。</p></section>
+
+          <section class="article-section"><h2>3. 実験環境の構築</h2><ul><li>KVM仮想マシンの作成</li><li>Docker環境の構築</li><li>VM上へのDocker環境の構築</li></ul><p>詳細は<a href="https://nitay.sharepoint.com/:w:/r/sites/-202685/_layouts/15/Doc.aspx?action=edit&amp;sourcedoc=%7Be6cfb565-bcfe-426e-8587-e0ec0a17a4c5%7D&amp;wdExp=TEAMS-TREATMENT&amp;web=1&amp;TeamsCID=ff48a779-3416-4fa1-b088-da11938e4db8" target="_blank" rel="noopener noreferrer">「実験計画書～環境準備～」</a>を参照します。</p></section>
+
+          <section class="article-section"><h2>4. 標準状態（設定変更なし）での性能測定</h2><h3>4-1. ホストOSでの実験</h3><p>詳細は<a href="https://nitay.sharepoint.com/:w:/r/sites/-202685/_layouts/15/Doc.aspx?action=edit&amp;sourcedoc=%7B83165c9c-cf7a-4210-bff3-edd8724d2d6%7D&amp;wdExp=TEAMS-TREATMENT&amp;web=1&amp;TeamsCID=152c723e-df52-4315-9636-eccfbaa26c29" target="_blank" rel="noopener noreferrer">「実験計画書～ホストOS～」</a>を参照します。</p><h3>4-2. KVM仮想マシン上での実験</h3><p>VM内で同一のベンチマークを実行し、結果を記録します。</p><h3>4-3. Dockerコンテナでの実験</h3><p>Dockerコンテナ内で同一のベンチマークを実行し、結果を記録します。</p><h3>4-4. KVM仮想マシン上のDockerでの実験</h3><p>VM内のDockerコンテナで同一のベンチマークを実行し、二重仮想化環境の結果を記録します。</p></section>
+
+          <section class="article-section"><h2>5. 標準状態での結果の分析・比較</h2><ul><li>ベンチマーク結果の整理</li><li>各環境の性能比較</li><li>グラフ作成</li><li>考察</li></ul></section>
+
+          <section class="article-section"><h2>6. 実験条件の変更</h2><ul><li>CPUピニング</li><li>CPUコア数の変更</li><li>メモリ割り当ての変更</li><li>その他、性能改善のための設定変更</li></ul></section>
+
+          <section class="article-section"><h2>7. 設定変更後の性能測定</h2><h3>7-1. ホストOSでの実験</h3><p>設定変更後のホストOSでベンチマークを実行します。</p><h3>7-2. KVM仮想マシン上での実験</h3><p>設定変更後のVM内でベンチマークを実行します。</p><h3>7-3. Dockerコンテナでの実験</h3><p>設定変更後のDockerコンテナ内でベンチマークを実行します。</p><h3>7-4. KVM仮想マシン上のDockerでの実験</h3><p>設定変更後のVM上Docker環境でベンチマークを実行します。</p></section>
+
+          <section class="article-section"><h2>8. 設定変更後の結果の分析・比較</h2><ul><li>標準状態との比較</li><li>設定変更による性能向上の確認</li><li>グラフ作成</li><li>考察</li></ul></section>
+
+          <section class="article-section"><h2>9. 全体の考察・まとめ</h2><ul><li>仮想化技術とコンテナ技術の性能比較</li><li>設定変更による性能改善の評価</li><li>各環境の特徴・利点・欠点の整理</li><li>今後の課題</li></ul></section>
+
+          <div class="article-end">実験計画書 · 全体の流れ · 2026年7月10日 · Gr03</div>
+        </article>
+      </section>
+      <aside class="sidebar" aria-label="報告書一覧"><div class="sidebar-sticky"><div class="sidebar-heading"><span class="sidebar-heading-mark"></span><div><span class="section-kicker">ARCHIVE</span><h2>レポート一覧</h2></div></div><section class="archive-group"><div class="archive-title"><span class="archive-icon report-icon" aria-hidden="true">▤</span><h3>研究経過報告書</h3></div><a class="archive-link" href="../rpr/rpr_2026-07-08.html"><span class="archive-date">2026.07.08</span><span class="archive-label">研究経過報告書</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section><section class="archive-group"><div class="archive-title"><span class="archive-icon plan-icon" aria-hidden="true">⌑</span><h3>実験計画書</h3></div><a class="archive-link is-current" href="ep_2026-07-10_verallflow.html" aria-current="page"><span class="archive-date">2026.07.10</span><span class="archive-label">全体の流れ</span><span class="archive-arrow" aria-hidden="true">↗</span></a><a class="archive-link" href="../ep/ep_2026-07-01_environmentalpreparation.html"><span class="archive-date">2026.07.01</span><span class="archive-label">環境準備</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section></div></aside>
+    </main>
+  </div>
+</body>
+</html>

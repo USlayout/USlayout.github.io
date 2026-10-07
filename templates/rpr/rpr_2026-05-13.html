@@ -3,58 +3,56 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="研究経過報告書のテンプレートです。日付と本文を更新して使用してください。">
-  <title>研究経過報告書 | 卒業研究</title>
+<meta name="description" content="研究経過報告書 · Gr03">
+  <title>2026年5月13日 研究経過報告書 | 研究ノート</title>
   <link rel="stylesheet" href="../../static/css/style.css">
+  <script src="../../static/js/archive.js" defer></script>
 </head>
 <body>
-  <!-- このファイルは公開用ではありません。複製し、templates/rpr/rpr_YYYY-MM-DD.html として保存してください。 -->
-  <dr class="site-shell">
-    <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>卒業研究</strong><small>GRADUATION RESEARCH · Gr03</small></span></a></header>
+<dr class="site-shell">
+    <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>研究ノート</strong><small>GRADUATION RESEARCH · Gr03</small></span></a><span class="header-note"><span class="status-dot"></span>研究の記録</span></header>
     <br class="page-grid article-layout">
       <br class="main-column">
         <a class="back-link" href="../index.html">← トップページへ戻る</a>
         <br class="article-paper">
           <div class="article-date">2026.05.13</div>
           <h1>研究経過報告書</h1>
-          <p class="article-subtitle">報告タイトルを入力</p>
           <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>学籍番号・氏名：</strong>123D024 大槻  雅宜 </span><span><strong>学籍番号・氏名：</strong>123D075 添野真之介 </span></div>
           <section class="article-section"><h2>研究テーマ</h2><p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究 </p></section>
           <section class="article-section"><h2>進捗状況</h2><p>今回は、コンテナ技術と仮想マシン技術の性能比較に関する最新論文を調査し、研究の方向性をさらに具体化した。
-<br><strong>1. 仮想マシン上で動作するコンテナの性能評価</strong></br>
+<br><strong>1. 仮想マシン上で動作するコンテナの性能評価</strong>
 
 「Experimental Assessment of Containers Running on Top of Virtual Machines」では、Docker・LXC・Podmanなどのコンテナを、仮想マシン上および物理環境上で動作させた場合の性能比較が行われていた。 
 
-<br>・コンテナはホストOSのカーネルを共有するため、仮想マシンよりもオーバーヘッドが小さい</br> 
+<br>・コンテナはホストOSのカーネルを共有するため、仮想マシンよりもオーバーヘッドが小さい 
 
-<br>・仮想マシン上でコンテナを動作させた場合、単体コンテナより性能低下が発生する</br>
+<br>・仮想マシン上でコンテナを動作させた場合、単体コンテナより性能低下が発生する
 
-<br>・Type1ハイパーバイザはType2より高性能である</br>
+<br>・Type1ハイパーバイザはType2より高性能である
 
-<br>・ネットワーク性能は仮想化方式による影響が大きい </br>
+<br>・ネットワーク性能は仮想化方式による影響が大きい 
 
 特に、CPUやメモリ性能ではコンテナの優位性が大きい一方、ネットワークやストレージでは設定や仮想化方式によって結果が変化することが分かった。 
 
-<br><strong>2. DockerのOS別性能評価  </strong></br>
+<br><strong>2. DockerのOS別性能評価  </strong>
 
 「Docker Performance Evaluation across Operating Systems」では、DockerをWindowsやLinuxなど複数のOS環境で実行した際の性能差について評価が行われていた。 
 
 調査内容から、DockerはLinux環境で最も高い性能を発揮し、Windows環境では仮想化レイヤの影響により性能低下が発生しやすいことが分かった。 
 
-<br>・CPUコア割り当て</br> 
+<br>・CPUコア割り当て 
 
-<br>・Hyper-Threadingの有効化</br> 
+<br>・Hyper-Threadingの有効化 
 
-<br>・vCPUアフィニティ設定</br> 
+<br>・vCPUアフィニティ設定 
 
-<br>・ストレージアクセス方式</br> 
+<br>・ストレージアクセス方式 
 
-<br>・ネットワークモード</br> 
+<br>・ネットワークモード 
 
 特にCPU割り当てやvCPU固定化によって性能改善が確認されており、単純な比較だけでなく、設定変更による最適化も重要であると理解した。
 
-<br><strong>3. 今回の調査から得られた知見 </strong></br>
+<br><strong>3. 今回の調査から得られた知見 </strong>
 
 今回の論文調査により、単純に「コンテナの方が高速」であるとは限らず、利用するハイパーバイザやOS、CPU割り当て方法、ネットワーク構成などによって性能が大きく変化することが分かった。 
 

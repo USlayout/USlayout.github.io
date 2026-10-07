@@ -123,6 +123,9 @@ h1 { margin: 11px 0 8px; font-size: 29px; font-weight: 600; letter-spacing: .04e
 .article-section p { margin-bottom: 8px; }
 .article-section ul, .article-section ol { margin: 5px 0 0; padding-left: 20px; }
 .article-section li { padding-left: 2px; }
+.article-section pre:not(.code-window) { overflow-x: auto; margin: 9px 0 12px; padding: 12px 14px; border: 1px solid #31424c; border-radius: 7px; color: #d8e4e8; background: #1b2a34; font: 11px/1.75 Consolas, "Cascadia Code", monospace; }
+.article-section pre:not(.code-window) code { color: inherit; white-space: pre; }
+.article-section img.report-image { display: block; max-width: 100%; height: auto; margin: 10px 0 18px; border: 1px solid #e5eaec; border-radius: 7px; }
 .article-table-wrap { overflow-x: auto; margin-top: 10px; }
 .article-table { width: 100%; border-collapse: collapse; font-size: 9.5px; }
 .article-table th, .article-table td { padding: 8px 9px; border: 1px solid #e7ecee; text-align: left; vertical-align: top; }

@@ -3,26 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="研究経過報告書のテンプレートです。日付と本文を更新して使用してください。">
-  <title>研究経過報告書 | 卒業研究</title>
+<meta name="description" content="研究経過報告書 · Gr03">
+  <title>2026年7月8日 研究経過報告書 | 研究ノート</title>
   <link rel="stylesheet" href="../../static/css/style.css">
+  <script src="../../static/js/archive.js" defer></script>
 </head>
 <body>
   <div class="site-shell">
     <header class="site-header">
       <a class="brand" href="../index.html">
         <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
-        <span><strong>卒業研究</strong><small>GRADUATION RESEARCH · Gr03</small></span>
+        <span><strong>研究ノート</strong><small>GRADUATION RESEARCH · Gr03</small></span>
       </a>
-    </header>
+    <span class="header-note"><span class="status-dot"></span>研究の記録</span></header>
     <main class="page-grid article-layout">
       <section class="main-column">
         <a class="back-link" href="../index.html">← トップページへ戻る</a>
         <article class="article-paper">
           <div class="article-date">2026.07.08</div>
           <h1>研究経過報告書</h1>
-          <p class="article-subtitle">報告タイトルを入力</p>
           <div class="article-meta">
             <span><strong>グループ：</strong>Gr03</span>
             <span><strong>学籍番号・氏名：</strong>123D024 大槻 雅宜</span>
@@ -38,7 +37,8 @@
             <p>論理ボリュームが120GBになっているので、total 1TB（957GB）に拡張しました。</p>
             <pre><code>sudo lvextend -l +100%FREE -r /dev/ubuntu-vg/ubuntu-lv</code></pre>
             <p>qemu-kvmはパッケージ構成の整理により、QEMU本体がqemu-system-x86に統合されたため、qemu-system-x86に変更しました。</p>
-            <p>Dockerのインストールおよび動作確認を実施し、問題がないことを確認しました。[1]</p><br><img src="../../imgs/2026-07-08hellodocker.jpg" alt="Dockerの動作確認"></p>
+            <p>Dockerのインストールおよび動作確認を実施し、問題がないことを確認しました。[1]</p>
+            <img class="report-image" src="../../imgs/2026-07-08hellodocker.jpg" alt="Dockerコンテナが正常に起動した画面">
             <p>検証データを共有するため、Git/GitHubの設定をしました。</p>
             <pre><code>ssh-keygen -t ed25519 -C your_email@example.com
 cat ~/.ssh/id_ed25519.pub</code></pre>
@@ -52,8 +52,8 @@ cat ~/.ssh/id_ed25519.pub</code></pre>
           <section class="article-section">
             <h2>今後の計画</h2>
             <ul>
-              <li>次に行う作業を記入</li>
-              <li>確認・分析する内容を記入</li>
+              <li>ベンチマークを実行する環境を整える</li>
+              <li>測定結果を記録し、環境ごとの差を比較する</li>
             </ul>
           </section>
           <section class="article-section">

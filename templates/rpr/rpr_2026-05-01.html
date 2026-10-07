@@ -3,41 +3,39 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="研究経過報告書のテンプレートです。日付と本文を更新して使用してください。">
-  <title>研究経過報告書 | 卒業研究</title>
+<meta name="description" content="研究経過報告書 · Gr03">
+  <title>2026年5月1日 研究経過報告書 | 研究ノート</title>
   <link rel="stylesheet" href="../../static/css/style.css">
+  <script src="../../static/js/archive.js" defer></script>
 </head>
 <body>
-  <!-- このファイルは公開用ではありません。複製し、templates/rpr/rpr_YYYY-MM-DD.html として保存してください。 -->
-  <div class="site-shell">
-    <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>卒業研究</strong><small>GRADUATION RESEARCH · Gr03</small></span></a></header>
+<div class="site-shell">
+    <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>研究ノート</strong><small>GRADUATION RESEARCH · Gr03</small></span></a><span class="header-note"><span class="status-dot"></span>研究の記録</span></header>
     <main class="page-grid article-layout">
       <section class="main-column">
         <a class="back-link" href="../index.html">← トップページへ戻る</a>
         <article class="article-paper">
           <div class="article-date">2026.05.01</div>
           <h1>研究経過報告書</h1>
-          <p class="article-subtitle">報告タイトルを入力</p>
           <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>学籍番号・氏名：</strong>123D024 大槻  雅宜 </span><span><strong>学籍番号・氏名：</strong>123D075 添野真之介 </span></div>
           <section class="article-section"><h2>研究テーマ</h2><p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究 </p></section>
           <section class="article-section"><h2>進捗状況</h2><p>前回の報告では環境の整理を中心に行ったが、本報告では実験設計の具体化を行った。CPU・メモリ・ディスクI/O・ネットワークの各性能項目について、使用するベンチマークツールおよび測定条件を整理した。また、公平な比較を行うためのリソース割当条件について検討を進めた。 <br><strong>必要な環境の理由</strong> <br>
 
-<br><strong>使用ソフトウェアと選定理由</strong></br>
+<br><strong>使用ソフトウェアと選定理由</strong>
 
-<br><strong>ホストOS（Ubuntu）</strong></br>
+<br><strong>ホストOS（Ubuntu）</strong>
 
 LinuxカーネルはKVMを標準サポートしており、ハードウェア仮想化（VT-x / AMD-V）を直接利用できる。WindowsやmacOSと異なり制約が少なく、安定性の高いLTS版が利用可能なため採用した。 
 
-<br><strong>仮想マシン（KVM）</strong></br>
+<br><strong>仮想マシン（KVM）</strong>
 
 KVMはLinuxカーネル統合型のハイパーバイザーであり、低オーバーヘッドで高性能。クラウド基盤でも広く使われており、実運用に近い評価が可能。 
 
-<br><strong>コンテナ（Docker）</strong></br>
+<br><strong>コンテナ（Docker）</strong>
 
 Dockerはカーネルを共有するためVMより軽量で高速。環境をイメージとして再現できるため、実験の再現性が高い。VMとの性能比較対象として適切。 
 
-<br><strong>ベンチマークツール</strong></br>
+<br><strong>ベンチマークツール</strong>
 
 ・sysbench：CPU・メモリ性能測定
 
@@ -49,21 +47,21 @@ Dockerはカーネルを共有するためVMより軽量で高速。環境をイ
 
  
 
-<br><strong>使用ハードウェアと選定理由</strong></br>
+<br><strong>使用ハードウェアと選定理由</strong>
 
-<br><strong>CPU（4コア以上・仮想化支援有効）</strong></br>
+<br><strong>CPU（4コア以上・仮想化支援有効）</strong>
 
 VMとコンテナを並列動作させるために必要。コア不足は測定誤差の原因となる。また、仮想化支援機能（VT-x / AMD-V）が無効な環境ではKVMが動作しないため、有効化が必須条件である。 
 
-<br><strong>メモリ（16GB以上）</strong></br>
+<br><strong>メモリ（16GB以上）</strong>
 
 VMはメモリ消費が大きいため十分な容量が必要。不足するとスワップ発生により結果が歪む。 
 
-<br><strong>ストレージ（SSD 512GB以上）</strong></br>
+<br><strong>ストレージ（SSD 512GB以上）</strong>
 
 HDDはI/Oがボトルネックになるため不適。VMイメージやログ保存も考慮し十分な容量を確保。 
 
-<br><strong>ネットワーク（1Gbps以上・有線）</strong></br>
+<br><strong>ネットワーク（1Gbps以上・有線）</strong>
 
 安定した通信環境を確保し、測定のばらつきを抑えるため。 </p></section>
           <section class="article-section"><h2>今後の計画</h2><ul><li>環境構築を行う</li><li>デフォルト設定におけるベンチマーク測定を実施する</li><li>各種設定を調整しながらパフォーマンスの変化を確認する </li><li>上記の試行を複数回繰り返し、結果を比較して要因を整理する</li></ul></section>

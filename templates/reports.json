@@ -1,0 +1,166 @@
+{
+  "rpr": [
+    {
+      "file": "rpr_2026-10-08.html",
+      "date": "2026-10-08",
+      "title": "Ubuntu 26.04.1への更新とベンチマーク準備"
+    },
+    {
+      "file": "rpr_2026-07-22.html",
+      "date": "2026-07-22",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-07-15.html",
+      "date": "2026-07-15",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-07-10.html",
+      "date": "2026-07-10",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-07-08.html",
+      "date": "2026-07-08",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-07-03.html",
+      "date": "2026-07-03",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-07-01.html",
+      "date": "2026-07-01",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-06-26.html",
+      "date": "2026-06-26",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-06-24.html",
+      "date": "2026-06-24",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-06-19.html",
+      "date": "2026-06-19",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-06-17.html",
+      "date": "2026-06-17",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-06-12.html",
+      "date": "2026-06-12",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-06-10.html",
+      "date": "2026-06-10",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-06-05.html",
+      "date": "2026-06-05",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-06-03.html",
+      "date": "2026-06-03",
+      "title": "KVM・Docker・ベンチマーク環境の構築状況"
+    },
+    {
+      "file": "rpr_2026-05-29.html",
+      "date": "2026-05-29",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-05-27.html",
+      "date": "2026-05-27",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-05-22.html",
+      "date": "2026-05-22",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-05-20.html",
+      "date": "2026-05-20",
+      "title": "仮想化とコンテナの性能比較に向けて"
+    },
+    {
+      "file": "rpr_2026-05-15.html",
+      "date": "2026-05-15",
+      "title": "仮想化とコンテナの性能比較に向けて"
+    },
+    {
+      "file": "rpr_2026-05-13.html",
+      "date": "2026-05-13",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-05-08.html",
+      "date": "2026-05-08",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-05-01.html",
+      "date": "2026-05-01",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-04-29.html",
+      "date": "2026-04-29",
+      "title": ""
+    },
+    {
+      "file": "rpr_2026-04-25.html",
+      "date": "2026-04-25",
+      "title": ""
+    }
+  ],
+  "ep": [
+    {
+      "file": "ep_2026-10-07_newfull.html",
+      "date": "2026-10-07",
+      "title": "ホストOSでのベンチマーク計画"
+    },
+    {
+      "file": "ep_2026-07-10_verallflow.html",
+      "date": "2026-07-10",
+      "title": "全体の流れ"
+    },
+    {
+      "file": "ep_2026-07-01_conditions.html",
+      "date": "2026-07-01",
+      "title": "条件"
+    },
+    {
+      "file": "ep_2026-07-01_environmentalpreparation.html",
+      "date": "2026-07-01",
+      "title": "環境準備"
+    },
+    {
+      "file": "ep_2026-07-01_hostos.html",
+      "date": "2026-07-01",
+      "title": "ホストOSでの性能測定"
+    },
+    {
+      "file": "ep_2026-07-01_osinstall.html",
+      "date": "2026-07-01",
+      "title": "KVMとDockerの性能比較に向けたOSインストール"
+    },
+    {
+      "file": "ep_2026-06-05_oldfull.html",
+      "date": "2026-06-05",
+      "title": "初期実験計画（旧版）"
+    }
+  ]
+}

@@ -1,4 +1,37 @@
 (() => {
+  async function showLatestReport() {
+    const target = document.querySelector('.latest-report');
+    if (!target) return;
+
+    try {
+      const manifestResponse = await fetch(new URL('reports.json', window.location.href));
+      if (!manifestResponse.ok) return;
+      const manifest = await manifestResponse.json();
+      const latest = manifest.rpr?.[0];
+      if (!latest) return;
+
+      const reportUrl = new URL(`rpr/${latest.file}`, window.location.href);
+      const reportResponse = await fetch(reportUrl);
+      if (!reportResponse.ok) return;
+      const reportDocument = new DOMParser().parseFromString(await reportResponse.text(), 'text/html');
+      const source = reportDocument.querySelector('.article-paper');
+      if (!source) return;
+
+      source.querySelectorAll('[href], [src]').forEach((element) => {
+        for (const attribute of ['href', 'src']) {
+          const value = element.getAttribute(attribute);
+          if (value) element.setAttribute(attribute, new URL(value, reportUrl).href);
+        }
+      });
+      source.classList.add('latest-report');
+      target.replaceWith(source);
+    } catch {
+      // Keep the saved report on the page if the report list cannot be loaded.
+    }
+  }
+
+  showLatestReport();
+
   const inputs = [...document.querySelectorAll('[data-task]')];
   if (!inputs.length) return;
 

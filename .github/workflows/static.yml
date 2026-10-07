@@ -37,6 +37,7 @@ jobs:
         run: |
           mkdir -p _site
           cp -a index.html templates static imgs videos _site/
+          node scripts/build-pages.mjs _site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

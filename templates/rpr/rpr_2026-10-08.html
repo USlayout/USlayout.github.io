@@ -3,33 +3,50 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="研究経過報告書のテンプレートです。日付と本文を更新して使用してください。">
-  <title>研究経過報告書 | 卒業研究</title>
+  <meta name="description" content="Ubuntu Server 26.04.1への更新とベンチマーク準備に関する研究経過報告書。">
+  <title>2026年10月8日 研究経過報告書 | 研究ノート</title>
   <link rel="stylesheet" href="../../static/css/style.css">
+  <script src="../../static/js/archive.js" defer></script>
 </head>
 <body>
   <div class="site-shell">
-    <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>卒業研究</strong><small>GRADUATION RESEARCH · Gr03</small></span></a></header>
+    <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>研究ノート</strong><small>GRADUATION RESEARCH · Gr03</small></span></a><span class="header-note"><span class="status-dot"></span>研究の記録</span></header>
     <main class="page-grid article-layout">
       <section class="main-column">
         <a class="back-link" href="../index.html">← トップページへ戻る</a>
         <article class="article-paper">
-          <div class="article-date">2026.10.08</div>
+          <div class="article-date"><time datetime="2026-10-08">2026.10.08</time> · RESEARCH PROGRESS REPORT</div>
           <h1>研究経過報告書</h1>
-          <p class="article-subtitle">報告タイトルを入力</p>
+          <p class="article-subtitle">Ubuntu 26.04.1への更新とベンチマーク準備</p>
           <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>学籍番号・氏名：</strong>123D024 大槻 雅宜</span><span><strong>学籍番号・氏名：</strong>123D075 添野 真之介</span></div>
           <section class="article-section"><h2>研究テーマ</h2><p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究</p></section>
           <section class="article-section"><h2>進捗状況</h2>
-          <p>UbuntuServer26.04からUbuntuServer26.04.1にアップデートしました。<pre><code>sudo apt update</code></pre>パッケージリストの更新<pre><code>sudo apt upgrade -y</code></pre>パッケージのアップグレード<pre><code>sudo apt autoremove -y</code></pre>不要なパッケージの削除 </p>
-          <p><pre><code>lsb_release -a</code></pre>OSのバージョン確認<br><img src="../../imgs/2026-10-07lsb_release.png" alt="OSのバージョン"></p>
-          <p>ネットワーク速度の確認linuxコマンド<pre><code>sudo ethtool eno1 | grep 'Speed|Duplex|Link'</code></pre><img src="../../imgs/2026-10-07ethool.png" alt="ネットワーク速度"></p>
-          <p>ネットワーク速度の確認Windowsコマンド<pre><code>Get-NetAdapter | Format-Table Name, Status, LinkSpeed</code></pre><img src="../../imgs/2026-10-07pw.png" alt="ネットワーク速度"></p>
-          <p>iperf3を使用してネットワーク速度の確認を行いました。<pre><code>iperf3 -s</code></pre>サーバー側で実行<br><pre><code>iperf3 -c 192.168.50.65 -t 30</code></pre>クライアント側で実行<br><img src="../../imgs/2026-10-07iperf3.png" alt="ネットワーク速度"></p>
+            <p>Ubuntu Server 26.04から26.04.1へ更新し、OSとネットワークの状態を確認しました。</p>
+            <h3>OSの更新</h3>
+            <pre class="report-code"><code>sudo apt update
+sudo apt upgrade -y
+sudo apt autoremove -y</code></pre>
+            <p>更新後にOSのバージョンを確認しました。</p>
+            <pre class="report-code"><code>lsb_release -a</code></pre>
+            <img class="report-image" src="../../imgs/2026-10-07lsb_release.png" alt="lsb_releaseコマンドの実行結果">
+            <h3>ネットワークの確認</h3>
+            <p>Linuxではリンク速度と接続状態を確認し、Windows側でもアダプターのリンク速度を確認しました。</p>
+            <pre class="report-code"><code>sudo ethtool eno1 | grep -E 'Speed|Duplex|Link'</code></pre>
+            <img class="report-image" src="../../imgs/2026-10-07ethool.png" alt="ethtoolで確認したネットワーク情報">
+            <pre class="report-code"><code>Get-NetAdapter | Format-Table Name, Status, LinkSpeed</code></pre>
+            <img class="report-image" src="../../imgs/2026-10-07pw.png" alt="Windowsで確認したネットワークアダプター情報">
+            <p>iperf3を使い、サーバー側とクライアント側からネットワーク性能を確認しました。</p>
+            <pre class="report-code"><code>iperf3 -s</code></pre>
+            <p>サーバー側で実行</p>
+            <pre class="report-code"><code>iperf3 -c 192.168.50.13 -t 30</code></pre>
+            <p>クライアント側で実行</p>
+            <img class="report-image" src="../../imgs/2026-10-07iperf3.png" alt="iperf3の測定結果">
+            <h3>測定スクリプトの整理</h3>
+            <p>ベンチマークをSysBench、fio、iperf3の項目別スクリプトに分割しました。また、SysBenchとfioをそれぞれ10回実行する <code>run_all.sh</code> を作成しました。iperf3は別途10回実行する計画です。</p>
           </section>
-          <section class="article-section"><h2>今後の計画</h2><ul><li>次に行う作業を記入</li><li>確認・分析する内容を記入</li></ul></section>
-          <section class="article-section"><h2>参考文献</h2><ol class="reference-list"><li>著者・機関名、資料名、URL、閲覧日を記入</li></ol></section>
-          <div class="article-end">研究経過報告書 · Gr03</div>
+          <section class="article-section"><h2>今後の計画</h2><ul><li>ホストOS上でSysBenchとfioを各10回、iperf3を10回実行する</li><li>測定結果と実行環境を記録し、異常値やばらつきを確認する</li><li>結果をグラフ化し、VM・Docker環境との比較に備える</li></ul></section>
+          <section class="article-section"><h2>参考文献</h2><p>今回の作業で新たに参照した文献はありません。</p></section>
+          <div class="article-end">研究経過報告書 · 2026年10月8日 · Gr03</div>
         </article>
       </section>
       <aside class="sidebar" aria-label="報告書一覧"><div class="sidebar-sticky"><div class="sidebar-heading"><span class="sidebar-heading-mark"></span><div><span class="section-kicker">ARCHIVE</span><h2>レポート一覧</h2></div></div><section class="archive-group"><div class="archive-title"><span class="archive-icon report-icon" aria-hidden="true">▤</span><h3>研究経過報告書</h3></div><a class="archive-link" href="rpr_YYYY-MM-DD.html"><span class="archive-date">YYYY.MM.DD</span><span class="archive-label">報告タイトル</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section><section class="archive-group"><div class="archive-title"><span class="archive-icon plan-icon" aria-hidden="true"></span><h3>実験計画書</h3></div><a class="archive-link" href="../ep/ep_YYYY-MM-DD.html"><span class="archive-date">YYYY.MM.DD</span><span class="archive-label">実験タイトル</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section></div></aside>

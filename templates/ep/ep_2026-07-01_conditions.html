@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="KVM、Docker、VM上Dockerの性能比較に向けた測定条件とCPU割り当て方針。">
+  <title>2026年7月10日 実験計画書 | 研究ノート</title>
+  <link rel="stylesheet" href="../../static/css/style.css">
+  <script src="../../static/js/archive.js" defer></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>研究ノート</strong><small>GRADUATION RESEARCH · Gr03</small></span></a><span class="header-note"><span class="status-dot"></span>研究の記録</span></header>
+    <main class="page-grid article-layout">
+      <section class="main-column">
+        <a class="back-link" href="../index.html">← トップページへ戻る</a>
+        <article class="article-paper">
+          <div class="article-date"><time datetime="2026-07-10">2026.07.10</time> · EXPERIMENT CONDITIONS</div>
+          <h1>実験計画書</h1>
+          <p class="article-subtitle">条件</p>
+          <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>学籍番号・氏名：</strong>123D024 大槻 雅宜</span><span><strong>学籍番号・氏名：</strong>123D075 添野 真之介</span></div>
+
+          <section class="article-section"><h2>1. 本計画書の目的</h2><p>本実験では、ホストOS単体（環境A）、VM単体（環境B）、Docker単体（環境C）、VM上Docker（環境D）の4環境について、CPU、メモリ、ストレージ、ネットワーク性能を同一条件下で比較します。本計画書では、先行研究の調査結果と実験に使用するホストマシンのCPU構成を踏まえ、同一条件を担保する方法を整理します。</p><p>使用するホストCPUはPコア（高性能コア）とEコア（高効率コア）が混在するハイブリッド構成です。そのため、仮想化方式による性能差を測定する前に、コア種別の違いという交絡要因を制御します。</p></section>
+
+          <section class="article-section"><h2>2. ホストCPU構成</h2><div class="article-table-wrap"><table class="article-table"><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody><tr><td>コア／スレッド数</td><td>20コア／20スレッド（Hyper-Threadingなし）</td></tr><tr><td>Pコア（高性能コア）</td><td>8基</td></tr><tr><td>Eコア（高効率コア）</td><td>12基</td></tr><tr><td>備考</td><td>PコアとEコアでは単一スレッド性能・IPCが異なるため、コア種別の混在は測定結果のばらつき要因となる</td></tr></tbody></table></div></section>
+
+          <section class="article-section"><h2>3. 先行研究における条件統一の考え方</h2><h3>3-1. Felter et al.（2015）</h3><p>KVMを代表的なハイパーバイザー、Dockerを代表的なコンテナ管理ツールとして用い、CPU、メモリ、ストレージ、ネットワークに負荷をかけるベンチマークで性能を比較した研究です。同一の物理ホスト・同一カーネル上でVMとコンテナを構築し、VMのvCPU数とコンテナのCPU割り当て（cgroup制限）を物理コア数に対して揃えています。</p><h3>3-2. Aqasizade, Ataie, Bastam（2024）</h3><p>VM単体、コンテナ単体、VM上コンテナを比較した研究です。同一ハードウェア（CPU、メモリ、ディスク、NIC）と同一ホストOS上で測定し、すべての仮想マシンに利用可能な最大リソースを割り当てることで、VMとコンテナ間のリソース条件を統一しています。</p><h3>3-3. 各種構成におけるVM・コンテナのベンチマーク（MDPI, 2021）</h3><p>VM・コンテナの性能や効率に影響する要因として、ハイパースレッディングの有無、vCPUコアの選び方、vCPUアフィニティ（CPUピニング）、vCPUの分離（isolation）の4点を挙げ、それぞれの効果を個別に検証しています。「条件を揃える」だけでなく、「条件を変えて要因を切り分ける」設計の参考とします。</p></section>
+
+          <section class="article-section"><h2>4. 本実験におけるCPU割り当て方針</h2><h3>4-1. Pコアに限定する方針</h3><p>先行研究の比較手法は、物理コアの性能が均質であることを前提としています。PコアとEコアが混在した状態で割り当てると、スケジューラが選ぶコア種別によって結果が変動し、仮想化方式による差とコア種別による差を切り分けられません。そこで、環境A〜Dの標準条件ではPコアのみを使用します。</p><h3>4-2. 実験用コア数</h3><p>Pコア8基のうち1〜2基をホストOS管理（SSH接続、監視、ロギングなど）用に残し、残りのうち4基を実験用コアとして固定します。SysBenchのデフォルトスレッド数（<code>--threads=4</code>）と揃え、既存の測定手順との整合性を保ちます。</p><h3>4-3. コアIDの確認方法</h3><p>Pコア・Eコアの物理コア番号を以下のコマンドで確認します。</p><pre class="code-window"><code>cat /sys/devices/cpu_core/cpus  # Pコアのコア番号一覧
+cat /sys/devices/cpu_atom/cpus  # Eコアのコア番号一覧
+lscpu -e                        # 全体のトポロジ確認</code></pre><p>確認したPコアの番号から4つ（例：<code>0,2,4,6</code>）を実験用コアとして使用します。</p><h3>4-4. 環境ごとの設定方法</h3><div class="article-table-wrap"><table class="article-table"><thead><tr><th>環境</th><th>設定コマンド例</th></tr></thead><tbody><tr><td>環境A（ホストOS）</td><td><code>taskset -c 0,2,4,6 sysbench cpu ...</code></td></tr><tr><td>環境B（VM単体）</td><td><code>virsh vcpupin ubuntu-vm 0 0</code>、<code>vcpupin ubuntu-vm 1 2</code>、<code>vcpupin ubuntu-vm 2 4</code>、<code>vcpupin ubuntu-vm 3 6</code>で物理Pコアへ固定</td></tr><tr><td>環境C（Docker単体）</td><td><code>docker run --cpuset-cpus="0,2,4,6" ...</code></td></tr><tr><td>環境D（VM上Docker）</td><td>VMを環境Bと同様にPコアへ固定し、VM内のDockerコンテナも<code>--cpuset-cpus="0,2,4,6"</code>相当の設定で対応コアへ固定</td></tr></tbody></table></div></section>
+
+          <section class="article-section"><h2>5. 追加検証：コア種別（アフィニティ）による影響</h2><p>「実験計画書〜全体の流れ〜」6章の「実験条件の変更」に対応し、コア種別の違いが性能に与える影響を独立した検証項目として設けます。実験用コア数は4基に固定し、割り当てるコアの種別のみを変化させます。</p><ul><li>条件1：Pコアのみ4基に固定</li><li>条件2：Eコアのみ4基に固定</li><li>条件3：固定なし（OSのスケジューラーに任せ、PコアとEコアが混在）</li></ul><p>この3条件を環境A〜Dそれぞれで測定し、同一条件を担保する方針の妥当性を検証するとともに、二重仮想化構成における性能差の要因を切り分けます。</p></section>
+
+          <section class="article-section"><h2>6. 測定条件のまとめ</h2><div class="article-table-wrap"><table class="article-table"><thead><tr><th>項目</th><th>統一条件</th></tr></thead><tbody><tr><td>ホストOS／カーネル</td><td>全環境で同一（Ubuntu Server 26.04 LTS）</td></tr><tr><td>使用コア種別</td><td>標準条件ではPコアのみ使用（4-1節）</td></tr><tr><td>割り当てコア数</td><td>4基（環境A〜D共通）</td></tr><tr><td>コアの固定方法</td><td><code>taskset</code>、<code>virsh vcpupin</code>、<code>--cpuset-cpus</code>で物理コアIDを明示的に固定</td></tr><tr><td>メモリ割り当て</td><td>VMのRAM割り当てとDockerの<code>--memory</code>を環境間で統一</td></tr><tr><td>電源／周波数管理</td><td>CPUガバナーをperformanceに固定し、Turbo Boostは各環境で同一設定</td></tr><tr><td>測定回数</td><td>同一条件下で10回実施し、中央値を採用</td></tr><tr><td>実行状態</td><td>ベンチマーク実行中は対象環境以外のVM、コンテナ、プロセスを停止し、単独実行とする</td></tr></tbody></table></div></section>
+
+          <section class="article-section"><h2>参考文献</h2><ol class="reference-list"><li><strong>Felter, W., Ferreira, A., Rajamony, R., Rubio, J.</strong><small>“An Updated Performance Comparison of Virtual Machines and Linux Containers,” 2015 IEEE International Symposium on Performance Analysis of Systems and Software (ISPASS), pp. 171-172, 2015.</small></li><li><strong>Aqasizade, H., Ataie, E., Bastam, M.</strong><small>“Experimental Assessment of Containers Running on Top of Virtual Machines,” arXiv:2401.07539, 2024.</small></li><li><strong>Benchmarking and Performance Evaluations on Various Configurations of Virtual Machine and Containers for Cloud-Based Scientific Workloads</strong><small>Applied Sciences, Vol. 11, No. 3, Article 993, 2021.</small></li></ol></section>
+
+          <div class="article-end">実験計画書 · 条件 · 2026年7月10日 · Gr03</div>
+        </article>
+      </section>
+      <aside class="sidebar" aria-label="報告書一覧"><div class="sidebar-sticky"><div class="sidebar-heading"><span class="sidebar-heading-mark"></span><div><span class="section-kicker">ARCHIVE</span><h2>レポート一覧</h2></div></div><section class="archive-group"><div class="archive-title"><span class="archive-icon report-icon" aria-hidden="true">▤</span><h3>研究経過報告書</h3></div><a class="archive-link" href="../rpr/rpr_2026-07-08.html"><span class="archive-date">2026.07.08</span><span class="archive-label">研究経過報告書</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section><section class="archive-group"><div class="archive-title"><span class="archive-icon plan-icon" aria-hidden="true">⌑</span><h3>実験計画書</h3></div><a class="archive-link is-current" href="ep_2026-07-01_conditions.html" aria-current="page"><span class="archive-date">2026.07.10</span><span class="archive-label">測定条件</span><span class="archive-arrow" aria-hidden="true">↗</span></a><a class="archive-link" href="ep_2026-07-01_environmentalpreparation.html"><span class="archive-date">2026.07.01</span><span class="archive-label">環境準備</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section></div></aside>
+    </main>
+  </div>
+</body>
+</html>
