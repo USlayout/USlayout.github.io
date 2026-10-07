@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="サーバー仮想化技術とコンテナ技術の性能比較に向けた先行研究と比較条件の整理。">
+  <title>2026年5月15日 研究経過報告書 | 卒業研究</title>
+  <link rel="stylesheet" href="../../static/css/style.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>卒業研究</strong><small>GRADUATION RESEARCH · Gr03</small></span></a><span class="header-note"><span class="status-dot"></span> 研究の記録</span></header>
+    <main class="page-grid article-layout">
+      <section class="main-column">
+        <a class="back-link" href="../index.html">← トップページへ戻る</a>
+        <article class="article-paper">
+          <div class="article-date"><time datetime="2026-05-15">2026.05.20</time> · RESEARCH PROGRESS REPORT</div>
+          <h1>研究経過報告書</h1>
+          <p class="article-subtitle">仮想化とコンテナの性能比較に向けて</p>
+          <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>学籍番号・氏名：</strong>123D024 大槻 雅宜</span><span><strong>学籍番号・氏名：</strong>123D075 添野 真之介</span></div>
+          <section class="article-section"><h2>研究テーマ</h2><p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究</p></section>
+          <section class="article-section"><h2>進捗状況</h2><p>ハードウェア選定理由 
+
+<br><strong>CPU：Intel Core Ultra 7 265（12コア20スレッド）</strong></br> 
+
+最新世代のCPUでは、Intel VT-xなどの仮想化支援機能が強化されており、KVMの性能をより正確に評価できる。そのため、仮想化性能を十分に測定可能な高性能CPUとして、Intel Core Ultra 7 265を採用する。 
+
+本CPUは12コア20スレッドを備えており、複数の仮想マシンやコンテナを同時に起動した際のスケーラビリティを検証できる。近年の実運用環境ではマルチコアCPUが標準的であるため、このスペックにより実環境に近い条件での比較が可能となる。 
+
+<br><strong>メモリ：16GB</strong></br> 
+
+仮想マシンではゲストOS分のメモリ消費が発生するため、十分なメモリ容量が必要である。本研究では複数の仮想マシン・コンテナを同時起動して比較を行うことを想定しており、16GBを搭載することでスワップの発生を抑制し、正確な性能測定が行える環境を確保する。 
+
+<br><strong>ストレージ：NVMe SSD 1TB</strong></br> 
+
+仮想化技術ではストレージI/O性能がシステム全体に大きく影響する。特にKVMでは仮想ディスクを介するため、低速なストレージでは仮想化によるオーバーヘッドよりもストレージがボトルネックとなりかねない。1TBのNVMe SSDを採用することで、OSや仮想マシンイメージ、測定データの保存領域を十分に確保しつつ、ストレージ起因の誤差を最小限に抑える。 
+
+ 
+
+<br><strong>最近の近しい論文</strong></br>
+
+Performance evaluation of designated containerization and virtualization solutions using a synthetic benchmark  
+<br>合成ベンチマークを用いた、指定されたコンテナ化・仮想化ソリューションの性能評価</br> 
+ 
+ITインフラにおける仮想化技術とコンテナ化技術のパフォーマンスを比較・分析することを目的とした論文 
+CPUパフォーマンス、RAMの効率、ディスクの読み書き速度の3点を評価しています。ベンチマークツールには SysBench[1] </p>
+          </section>
+          <section class="article-section"><h2>今後の計画</h2><ul><li>Linux環境にKVMとDockerを構築する</li><li>VM単体・Docker単体・VM上Dockerの3環境を比較する</li><li>CPU・メモリ・ストレージ・ネットワーク性能を測定する</li><li>Hyper-ThreadingやCPUアフィニティ設定による変化を確認する</li><li>ベンチマーク結果をグラフ化し、性能差の要因を分析する</li></ul></section>
+          <section class="article-section"><h2>参考文献</h2><ol class="reference-list"><li><a href="https://ph.pollub.pl/index.php/jcsi/article/view/6231">https://ph.pollub.pl/index.php/jcsi/article/view/6231 </a><br>著者: Sebastian Tarasiuk, Damian Traczuk, Kacper Szczepaniuk, Patryk Stoń, Jakub Smołka 2024年 </li></ol></section>
+          <div class="article-end">研究経過報告書 · 2026年5月15日 · Gr03</div>
+        </article>
+      </section>
+      <aside class="sidebar" aria-label="報告書一覧"><div class="sidebar-sticky"><div class="sidebar-heading"><span class="sidebar-heading-mark"></span><div><span class="section-kicker">ARCHIVE</span><h2>レポート一覧</h2></div></div><section class="archive-group"><div class="archive-title"><span class="archive-icon report-icon" aria-hidden="true">▤</span><h3>研究経過報告書</h3><span class="archive-count">01</span></div><a class="archive-link is-current" href="rpr_2026-05-15.html" aria-current="page"><span class="archive-date">2026.05.15</span><span class="archive-label">先行研究と比較条件の整理</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section><section class="archive-group"><div class="archive-title"><span class="archive-icon plan-icon" aria-hidden="true">⌑</span><h3>実験計画書</h3><span class="archive-count">01</span></div><a class="archive-link" href="../ep/ep_2026-07-01.html"><span class="archive-date">2026.07.01</span><span class="archive-label">ホストOSでの性能測定</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section><div class="sidebar-note"><span>✳</span><p>小さな実験を積み重ねて、結果を記録していきます。</p></div></div></aside>
+    </main>
+  </div>
+</body>
+</html>

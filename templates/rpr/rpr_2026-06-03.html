@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="研究経過報告書のテンプレートです。日付と本文を更新して使用してください。">
+  <title>研究経過報告書 | 卒業研究</title>
+  <link rel="stylesheet" href="../../static/css/style.css">
+</head>
+<body>
+  <!-- このファイルは公開用ではありません。複製し、templates/rpr/rpr_YYYY-MM-DD.html として保存してください。 -->
+  <div class="site-shell">
+    <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>卒業研究</strong><small>GRADUATION RESEARCH · Gr03</small></span></a></header>
+    <main class="page-grid article-layout">
+      <section class="main-column">
+        <a class="back-link" href="../index.html">← トップページへ戻る</a>
+        <article class="article-paper">
+          <div class="article-date">2026.06.03</div>
+          <h1>研究経過報告書</h1>
+          <p class="article-subtitle">KVM・Docker・ベンチマーク環境の構築状況</p>
+          <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>学籍番号・氏名：</strong>123D024 大槻  雅宜 </span><span><strong>学籍番号・氏名：</strong>123D075 添野真之介 </span></div>
+          <section class="article-section"><h2>研究テーマ</h2><p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究</p></section>
+          <section class="article-section">
+            <h2>進捗状況</h2>
+            <p>今回は、KVM、Docker、SysBench、fio、iperf3 を用いた比較環境の構築手順を整理し、今後の実験に必要な前提条件を確認した。</p>
+
+            <h3>1. KVM の構築</h3>
+            <p>KVM を利用するため、CPU の仮想化支援機能と必要なパッケージを確認した。仮想化対応の確認は以下で行う。</p>
+            <div class="code-card">
+              <div class="code-card-header">
+                <div>
+                  <span class="code-language">BASH</span>
+                  <h2>仮想化対応確認</h2>
+                </div>
+              </div>
+              <pre class="code-window"><code>grep -E 'vmx|svm' /proc/cpuinfo | head -5
+lscpu | grep Virtualization</code></pre>
+            </div>
+            <p>vmx（Intel）または svm（AMD）が表示されれば仮想化対応と判断できる。対応していない場合は BIOS/UEFI の Virtualization Technology を有効にする。</p>
+            <p>導入手順は次の通りである。</p>
+            <div class="code-card">
+              <div class="code-card-header">
+                <div>
+                  <span class="code-language">BASH</span>
+                  <h2>KVM パッケージ導入</h2>
+                </div>
+              </div>
+              <pre class="code-window"><code>sudo apt update && sudo apt upgrade -y
+sudo apt install -y qemu-kvm libvirt-daemon-system libvirt-clients \
+  bridge-utils virt-manager virtinst
+sudo systemctl enable --now libvirtd
+sudo usermod -aG libvirt,kvm $(whoami)
+newgrp libvirt</code></pre>
+            </div>
+            <p>主なパッケージの役割は以下の通り。</p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr><th>パッケージ</th><th>役割</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>qemu-kvm</td><td>QEMU エミュレータ（KVM のバックエンド）</td></tr>
+                  <tr><td>libvirt-daemon-system</td><td>libvirt デーモン（VM 管理 API）</td></tr>
+                  <tr><td>libvirt-clients</td><td>virsh コマンドラインツール</td></tr>
+                  <tr><td>bridge-utils</td><td>ブリッジネットワーク設定</td></tr>
+                  <tr><td>virt-manager</td><td>GUI ベースの VM 管理</td></tr>
+                  <tr><td>virtinst</td><td>virt-install による CLI での VM 作成</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>動作確認では次のコマンドを使い、VM の登録状況とネットワーク状態を確認する。</p>
+            <div class="code-card">
+              <div class="code-card-header">
+                <div>
+                  <span class="code-language">BASH</span>
+                  <h2>動作確認</h2>
+                </div>
+              </div>
+              <pre class="code-window"><code>virsh list --all
+virsh net-list --all
+sudo virsh net-start default && sudo virsh net-autostart default</code></pre>
+            </div>
+            <p>VM 作成の例は以下の通りである。</p>
+            <div class="code-card">
+              <div class="code-card-header">
+                <div>
+                  <span class="code-language">BASH</span>
+                  <h2>Ubuntu VM 作成例</h2>
+                </div>
+              </div>
+              <pre class="code-window"><code>virt-install \
+  --name ubuntu-vm \
+  --ram 2048 \
+  --vcpus 2 \
+  --disk path=/var/lib/libvirt/images/ubuntu-vm.qcow2,size=20 \
+  --os-variant ubuntu24.04 \
+  --cdrom /path/to/ubuntu-24.04.iso \
+  --network network=default \
+  --graphics none \
+  --console pty,target_type=serial</code></pre>
+            </div>
+
+            <h3>2. Docker の構築</h3>
+            <p>Docker Engine の導入では、競合パッケージの除去と公式リポジトリの追加を行った。公式ドキュメントの案内に従って構築を進める。</p>
+            <div class="code-card">
+              <div class="code-card-header">
+                <div>
+                  <span class="code-language">BASH</span>
+                  <h2>Docker インストール</h2>
+                </div>
+              </div>
+              <pre class="code-window"><code>for pkg in docker.io docker-doc docker-compose docker-compose-v2 \
+           podman-docker containerd runc; do
+  sudo apt-get remove $pkg
+done
+
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+  -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
+  https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
+  | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io \
+  docker-buildx-plugin docker-compose-plugin
+
+sudo usermod -aG docker $(whoami)
+newgrp docker
+sudo systemctl enable --now docker
+docker run hello-world</code></pre>
+            </div>
+
+            <h3>3. ベンチマークツールのインストール</h3>
+            <p>CPU・メモリ・ストレージ・ネットワーク性能の比較に向けて、SysBench、fio、iperf3 を導入した。パッケージマネージャからまとめてインストールできる。</p>
+            <div class="code-card">
+              <div class="code-card-header">
+                <div>
+                  <span class="code-language">BASH</span>
+                  <h2>ベンチマーク導入</h2>
+                </div>
+              </div>
+              <pre class="code-window"><code>sudo apt update
+sudo apt install -y sysbench fio iperf3</code></pre>
+            </div>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr><th>ツール</th><th>主な用途</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>SysBench</td><td>CPU・メモリ性能の測定</td></tr>
+                  <tr><td>fio</td><td>ストレージ I/O の測定</td></tr>
+                  <tr><td>iperf3</td><td>ネットワークスループットの測定</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>代表的な実行例を以下に示す。</p>
+            <div class="code-card">
+              <div class="code-card-header">
+                <div>
+                  <span class="code-language">BASH</span>
+                  <h2>実行例</h2>
+                </div>
+              </div>
+              <pre class="code-window"><code># CPU（単一スレッド）
+sysbench cpu --cpu-max-prime=20000 --threads=1 --time=30 run
+
+# CPU（マルチスレッド）
+sysbench cpu --cpu-max-prime=20000 --threads=$(nproc) --time=60 run
+
+# メモリ
+sysbench memory --memory-total-size=10G --threads=4 run
+
+# fio（ランダム読み込み）
+fio --name=rand-read --ioengine=libaio --direct=1 \
+  --rw=randread --bs=4k --iodepth=16 \
+  --size=1G --runtime=30 --time_based \
+  --filename=/tmp/fio-test.dat --output-format=json
+
+# iperf3（TCP）
+iperf3 -c &lt;サーバーIPアドレス&gt; -t 10 -P 4 --json
+
+# iperf3（UDP）
+iperf3 -c &lt;サーバーIPアドレス&gt; -u -b 1G -t 10 --json</code></pre>
+            </div>
+
+            <h3>4. VM 上 Docker の構築</h3>
+            <ol>
+              <li>KVM で Ubuntu VM を起動し、SSH でログインする。</li>
+              <li>VM 内で Docker の構築手順をそのまま実施する。</li>
+              <li>SysBench、fio、iperf3 を VM 内でも導入する。</li>
+              <li>ホスト直接実行と比較するため、Docker コンテナ内でベンチマークを実行する。</li>
+            </ol>
+            <p>ネスト仮想化を利用する場合は、Intel 系の環境では <code>sudo modprobe kvm_intel nested=1</code> で有効化できる。</p>
+
+            <h3>5. 環境構築後の確認項目</h3>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr><th>No.</th><th>確認項目</th><th>確認コマンド</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>CPU が仮想化をサポートしている</td><td>grep -E 'vmx|svm' /proc/cpuinfo</td></tr>
+                  <tr><td>2</td><td>libvirtd サービスが active である</td><td>systemctl status libvirtd</td></tr>
+                  <tr><td>3</td><td>KVM デフォルトネットワークが active である</td><td>virsh net-list --all</td></tr>
+                  <tr><td>4</td><td>virsh で VM 一覧が取得できる</td><td>virsh list --all</td></tr>
+                  <tr><td>5</td><td>Docker デーモンが起動している</td><td>systemctl status docker</td></tr>
+                  <tr><td>6</td><td>docker run hello-world が成功する</td><td>docker run hello-world</td></tr>
+                  <tr><td>7</td><td>sysbench が正常に動作する</td><td>sysbench cpu run</td></tr>
+                  <tr><td>8</td><td>fio が正常に動作する</td><td>fio --version</td></tr>
+                  <tr><td>9</td><td>iperf3 のサーバーモードが起動する</td><td>iperf3 -s &amp;</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="article-section"><h2>今後の計画</h2><ul><li>文献調査</li><li>Linux 環境に KVM と Docker を構築する</li><li>VM 単体・Docker 単体・VM 上 Docker の 3 環境を比較する</li><li>CPU・メモリ・ストレージ・ネットワーク性能を測定する</li><li>Hyper-Threading や CPU アフィニティ設定による変化を確認する</li><li>ベンチマーク結果をグラフ化し、性能差の要因を分析する</li></ul></section>
+          <section class="article-section">
+            <h2>参考文献</h2>
+            <ol class="reference-list">
+              <li>
+                <span class="reference-tag">Official</span>
+                <strong>Linux KVM Documentation</strong>
+                <small>Kernel-based Virtual Machine の公式ドキュメント。仮想化基盤の概念と設定方法を確認するために利用した。</small>
+                <a href="https://linux-kvm.org/page/Documents" target="_blank" rel="noreferrer">https://linux-kvm.org/page/Documents</a>
+              </li>
+              <li>
+                <span class="reference-tag">Official</span>
+                <strong>libvirt Documentation</strong>
+                <small>VM の管理とネットワーク設定に関する公式リファレンス。virsh や libvirt の操作を整理する際に参照した。</small>
+                <a href="https://libvirt.org/docs.html" target="_blank" rel="noreferrer">https://libvirt.org/docs.html</a>
+              </li>
+              <li>
+                <span class="reference-tag">Official</span>
+                <strong>Docker Engine installation on Ubuntu</strong>
+                <small>Docker Engine の Ubuntu 向け導入手順。競合パッケージ除去とリポジトリ追加の手順を確認した。</small>
+                <a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank" rel="noreferrer">https://docs.docker.com/engine/install/ubuntu/</a>
+              </li>
+              <li>
+                <span class="reference-tag">Tool</span>
+                <strong>fio Documentation</strong>
+                <small>ストレージ I/O のベンチマーク手法と各種オプションの説明を確認した。</small>
+                <a href="https://fio.readthedocs.io/" target="_blank" rel="noreferrer">https://fio.readthedocs.io/</a>
+              </li>
+              <li>
+                <span class="reference-tag">Tool</span>
+                <strong>iperf3 Documentation</strong>
+                <small>ネットワークスループット計測に用いる iperf3 の利用方法と JSON 出力の活用を確認した。</small>
+                <a href="https://software.es.net/iperf/" target="_blank" rel="noreferrer">https://software.es.net/iperf/</a>
+              </li>
+            </ol>
+          </section>
+          <div class="article-end">研究経過報告書 · Gr03</div>
+        </article>
+      </section>
+      <aside class="sidebar" aria-label="報告書一覧"><div class="sidebar-sticky"><div class="sidebar-heading"><span class="sidebar-heading-mark"></span><div><span class="section-kicker">ARCHIVE</span><h2>レポート一覧</h2></div></div><section class="archive-group"><div class="archive-title"><span class="archive-icon report-icon" aria-hidden="true">▤</span><h3>研究経過報告書</h3></div><a class="archive-link" href="rpr_YYYY-MM-DD.html"><span class="archive-date">YYYY.MM.DD</span><span class="archive-label">報告タイトル</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section><section class="archive-group"><div class="archive-title"><span class="archive-icon plan-icon" aria-hidden="true"></span><h3>実験計画書</h3></div><a class="archive-link" href="../ep/ep_YYYY-MM-DD.html"><span class="archive-date">YYYY.MM.DD</span><span class="archive-label">実験タイトル</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section></div></aside>
+    </main>
+  </div>
+</body>
+</html>

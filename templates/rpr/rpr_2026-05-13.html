@@ -26,13 +26,13 @@
 
 「Experimental Assessment of Containers Running on Top of Virtual Machines」では、Docker・LXC・Podmanなどのコンテナを、仮想マシン上および物理環境上で動作させた場合の性能比較が行われていた。 
 
-<br>コンテナはホストOSのカーネルを共有するため、仮想マシンよりもオーバーヘッドが小さい</br> 
+<br>・コンテナはホストOSのカーネルを共有するため、仮想マシンよりもオーバーヘッドが小さい</br> 
 
-<br>仮想マシン上でコンテナを動作させた場合、単体コンテナより性能低下が発生する</br>
+<br>・仮想マシン上でコンテナを動作させた場合、単体コンテナより性能低下が発生する</br>
 
-<br>Type1ハイパーバイザはType2より高性能である</br>
+<br>・Type1ハイパーバイザはType2より高性能である</br>
 
-<br>ネットワーク性能は仮想化方式による影響が大きい </br>
+<br>・ネットワーク性能は仮想化方式による影響が大きい </br>
 
 特に、CPUやメモリ性能ではコンテナの優位性が大きい一方、ネットワークやストレージでは設定や仮想化方式によって結果が変化することが分かった。 
 
@@ -42,20 +42,28 @@
 
 調査内容から、DockerはLinux環境で最も高い性能を発揮し、Windows環境では仮想化レイヤの影響により性能低下が発生しやすいことが分かった。 
 
-CPUコア割り当て 
+<br>・CPUコア割り当て</br> 
 
-Hyper-Threadingの有効化 
+<br>・Hyper-Threadingの有効化</br> 
 
-vCPUアフィニティ設定 
+<br>・vCPUアフィニティ設定</br> 
 
-ストレージアクセス方式 
+<br>・ストレージアクセス方式</br> 
 
-ネットワークモード 
+<br>・ネットワークモード</br> 
 
 特にCPU割り当てやvCPU固定化によって性能改善が確認されており、単純な比較だけでなく、設定変更による最適化も重要であると理解した。
+
+<br><strong>3. 今回の調査から得られた知見 </strong></br>
+
+今回の論文調査により、単純に「コンテナの方が高速」であるとは限らず、利用するハイパーバイザやOS、CPU割り当て方法、ネットワーク構成などによって性能が大きく変化することが分かった。 
+
+また、コンテナと仮想マシンを組み合わせた構成は、クラウド環境で一般的に利用されているため、単体比較だけでなく「VM上のDocker」という構成も評価対象として重要であると考えられる。 
 </p></section>
-          <section class="article-section"><h2>今後の計画</h2><ul><li>環境構築を行う</li><li>デフォルト設定におけるベンチマーク測定を実施する</li><li>各種設定を調整しながらパフォーマンスの変化を確認する </li><li>上記の試行を複数回繰り返し、結果を比較して要因を整理する</li></ul></section>
-          <section class="article-section"><h2>参考文献</h2><ol class="reference-list"><li>なし</li></ol></section>
+          <section class="article-section"><h2>今後の計画</h2><ul><li>Linux環境にKVMとDockerを構築する </li><li>VM単体・Docker単体・VM上Dockerの3環境を比較する </li><li>CPU・メモリ・ストレージ・ネットワーク性能を測定する</li><li>Hyper-ThreadingやCPUアフィニティ設定による変化を確認する </li><li>ベンチマーク結果をグラフ化し、性能差の要因を分析する </li></ul></section>
+          <section class="article-section"><h2>参考文献</h2><ol class="reference-list"><li>Experimental Assessment of Containers Running on Top of Virtual Machines (arXiv) </li>
+
+<li>Docker Performance Evaluation across Operating Systems (MDPI) </li></ol></section>
           <div class="article-end">研究経過報告書 · Gr03</div>
         </article>
       </section>
