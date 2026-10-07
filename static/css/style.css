@@ -222,6 +222,11 @@ h1 { margin: 11px 0 8px; font-size: 29px; font-weight: 600; letter-spacing: .04e
 .archive-callout h2 { margin: 4px 0 3px; font-size: 13px; font-weight: 600; }
 .archive-callout p { margin: 0; color: var(--muted); font-size: 10px; }
 .archive-callout a { flex: 0 0 auto; color: var(--teal-dark); font-size: 10px; font-weight: 600; }
+.archive-month { margin-top: 24px; }
+.archive-month h2 { margin: 0; padding-bottom: 8px; border-bottom: 1px solid #e5eaec; color: #34434c; font-size: 14px; font-weight: 600; }
+.archive-month-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+.archive-month-list .archive-link { margin: 0; }
+@media (max-width: 520px) { .archive-month-list { grid-template-columns: 1fr; } }
 
 @media (max-width: 900px) {
   .site-shell { padding: 0 30px; }

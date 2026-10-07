@@ -7,7 +7,7 @@
       const manifestResponse = await fetch(new URL('reports.json', window.location.href));
       if (!manifestResponse.ok) return;
       const manifest = await manifestResponse.json();
-      const latest = manifest.rpr?.[0];
+      const latest = manifest.rpr?.find((report) => report.date >= '2026-10-01');
       if (!latest) return;
 
       const reportUrl = new URL(`rpr/${latest.file}`, window.location.href);

@@ -36,7 +36,7 @@ for (const folderName of ['rpr', 'ep']) {
     html = html.replace(/\s*<meta\s+name=["']robots["']\s+content=["']noindex,\s*nofollow["']\s*\/?>/i, '');
     html = html.replace(/\s*<!--\s*このファイルは公開用ではありません。[\s\S]*?-->/, '');
     html = html.replace(/<strong>卒業研究<\/strong>/g, '<strong>研究ノート</strong>');
-    html = html.replace(/<script\s+src=["']\.\.\/\.\.\/static\/js\/archive\.js["'][^>]*><\/script>/gi, '');
+    html = html.replace(/\s*<script\s+src=["']\.\.\/\.\.\/static\/js\/archive\.js["'][^>]*><\/script>\s*/gi, '\n');
     html = html.replace(/<\/head>/i, '  <script src="../../static/js/archive.js" defer></script>\n</head>');
     await writeFile(fullPath, html, 'utf8');
   }
