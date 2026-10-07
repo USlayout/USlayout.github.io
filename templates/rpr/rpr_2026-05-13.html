@@ -10,22 +10,52 @@
 </head>
 <body>
   <!-- このファイルは公開用ではありません。複製し、templates/rpr/rpr_YYYY-MM-DD.html として保存してください。 -->
-  <div class="site-shell">
+  <dr class="site-shell">
     <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>卒業研究</strong><small>GRADUATION RESEARCH · Gr03</small></span></a></header>
-    <main class="page-grid article-layout">
-      <section class="main-column">
+    <br class="page-grid article-layout">
+      <br class="main-column">
         <a class="back-link" href="../index.html">← トップページへ戻る</a>
-        <article class="article-paper">
-          <div class="article-date">YYYY.MM.DD</div>
+        <br class="article-paper">
+          <div class="article-date">2026.05.13</div>
           <h1>研究経過報告書</h1>
           <p class="article-subtitle">報告タイトルを入力</p>
           <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>学籍番号・氏名：</strong>123D024 大槻  雅宜 </span><span><strong>学籍番号・氏名：</strong>123D075 添野真之介 </span></div>
           <section class="article-section"><h2>研究テーマ</h2><p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究 </p></section>
-          <section class="article-section"><h2>進捗状況</h2><p>現時点では大きな進捗はないが、次回に向けて仮想環境のテストを行う予定である。 
+          <section class="article-section"><h2>進捗状況</h2><p>今回は、コンテナ技術と仮想マシン技術の性能比較に関する最新論文を調査し、研究の方向性をさらに具体化した。
+<br><strong>1. 仮想マシン上で動作するコンテナの性能評価</strong></br>
 
-具体的には、DockerおよびKVMの導入を検討しており、今後の研究に必要なソフトウェアや環境について精査し、整理する段階にある。 </p></section>
-          <section class="article-section"><h2>今後の計画</h2><ul><li>次に行う作業を記入</li><li>確認・分析する内容を記入</li></ul></section>
-          <section class="article-section"><h2>参考文献</h2><ol class="reference-list"><li>著者・機関名、資料名、URL、閲覧日を記入</li></ol></section>
+「Experimental Assessment of Containers Running on Top of Virtual Machines」では、Docker・LXC・Podmanなどのコンテナを、仮想マシン上および物理環境上で動作させた場合の性能比較が行われていた。 
+
+<br>コンテナはホストOSのカーネルを共有するため、仮想マシンよりもオーバーヘッドが小さい</br> 
+
+<br>仮想マシン上でコンテナを動作させた場合、単体コンテナより性能低下が発生する</br>
+
+<br>Type1ハイパーバイザはType2より高性能である</br>
+
+<br>ネットワーク性能は仮想化方式による影響が大きい </br>
+
+特に、CPUやメモリ性能ではコンテナの優位性が大きい一方、ネットワークやストレージでは設定や仮想化方式によって結果が変化することが分かった。 
+
+<br><strong>2. DockerのOS別性能評価  </strong></br>
+
+「Docker Performance Evaluation across Operating Systems」では、DockerをWindowsやLinuxなど複数のOS環境で実行した際の性能差について評価が行われていた。 
+
+調査内容から、DockerはLinux環境で最も高い性能を発揮し、Windows環境では仮想化レイヤの影響により性能低下が発生しやすいことが分かった。 
+
+CPUコア割り当て 
+
+Hyper-Threadingの有効化 
+
+vCPUアフィニティ設定 
+
+ストレージアクセス方式 
+
+ネットワークモード 
+
+特にCPU割り当てやvCPU固定化によって性能改善が確認されており、単純な比較だけでなく、設定変更による最適化も重要であると理解した。
+</p></section>
+          <section class="article-section"><h2>今後の計画</h2><ul><li>環境構築を行う</li><li>デフォルト設定におけるベンチマーク測定を実施する</li><li>各種設定を調整しながらパフォーマンスの変化を確認する </li><li>上記の試行を複数回繰り返し、結果を比較して要因を整理する</li></ul></section>
+          <section class="article-section"><h2>参考文献</h2><ol class="reference-list"><li>なし</li></ol></section>
           <div class="article-end">研究経過報告書 · Gr03</div>
         </article>
       </section>
