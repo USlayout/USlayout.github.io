@@ -20,7 +20,7 @@
           <p class="article-subtitle">ホストOSでのベンチマーク計画</p>
           <div class="article-meta"><span><strong>グループ：</strong>Gr03</span><span><strong>学籍番号・氏名：</strong>123D024 大槻 雅宜</span><span><strong>学籍番号・氏名：</strong>123D075 添野 真之介</span></div>
           <section class="article-section"><h2>1. 実験の目的</h2><p>ホストOSでベンチマークを実施し、性能の基準値を得る</p></section>
-          <section class="article-section"><h2>2. 実験環境</h2><h3>2-1. ホスト環境</h3><p>Ubuntu Server 26.04.1 LTS、Intel Core Ultra 7 275、メモリ16GB、ネットワーク1Gb/sを使用します。</p></section>
+          <section class="article-section"><h2>2. 実験環境</h2><h3>2-1. ホスト環境</h3><p>Ubuntu Server 26.04.1 LTS、Intel Core Ultra 7 265、メモリ16GB、ネットワーク1Gb/sを使用します。</p></section>
           <section class="article-section"><h2>3. 測定ツールと測定項目</h2><div class="article-table-wrap"><table class="article-table"><thead><tr><th>測定項目</th><th>ツール</th><th>主要指標・条件</th></tr></thead><tbody><tr><td>CPU</td><td>sysbench</td><td>処理速度、実行時間</td></tr><tr><td>メモリ</td><td>sysbench</td><td>使用量、解放速度</td></tr><tr><td>ストレージ</td><td>fio</td><td>読み書き速度、IOPS</td></tr><tr><td>ネットワーク</td><td>iperf3</td><td>転送速度、遅延</td></tr></tbody></table></div></section>
           <section class="article-section"><h2>4. 実験手順</h2><ol><li>環境のチェック</li><li>測定を10回実行して記録</li><li>異常値を確認し、グラフ化して分析</li></ol></section>
           <section class="article-section"><h2>5. 詳細手順</h2><ul><li>run_all.shを実行このシェルスクリプトにはsysbenchとfioが10回実行される。</li><li>iperf3_benchmark.shを実行これは1回ずつ計10回実行する。</li><li>結果を収集し、分析する。明らかな異常値があった場合、再度実験を行う。</li></ul></section>
