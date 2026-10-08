@@ -72,6 +72,23 @@ sudo apt autoremove -y</code></pre>
               </table>
             </div>
             <p>CPUの値は10回の測定結果の平均値です。RAMのReadはメモリからの読み込み、Writeはメモリへの書き込みを表します。</p>
+            <h3>fio測定結果（10回平均）</h3>
+            <p><code>2026-10-08-09-36-58</code> に実行したfioの結果を、各JSONファイルのread/writeセクションから集計しました。</p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <caption>fio測定結果の概要</caption>
+                <thead>
+                  <tr><th scope="col">種別</th><th scope="col">平均 IOPS</th><th scope="col">平均スループット</th><th scope="col">平均レイテンシ</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row"><code>fio_rand_read.json</code></th><td>66,819.77</td><td>261.01 MiB/s</td><td>59.41 us</td></tr>
+                  <tr><th scope="row"><code>fio_rand_write.json</code></th><td>923,656.37</td><td>3,608.03 MiB/s</td><td>1.31 us</td></tr>
+                  <tr><th scope="row"><code>fio_seq_read.json</code></th><td>3,095.24</td><td>3,095.24 MiB/s</td><td>320.33 us</td></tr>
+                  <tr><th scope="row"><code>fio_seq_write.json</code></th><td>2,482.64</td><td>2,482.64 MiB/s</td><td>113.69 us</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>スループットはJSONの <code>bw</code>（KiB/s）をMiB/sへ換算し、レイテンシは <code>clat_ns.mean</code>（ns）をusへ換算しています。</p>
             <h3>用語の説明</h3>
             <div class="article-table-wrap">
               <table class="article-table">
@@ -81,9 +98,11 @@ sudo apt autoremove -y</code></pre>
                 <tbody>
                   <tr><th scope="row">events/s</th><td>1秒あたりに処理できたイベント数です。値が大きいほど、単位時間あたりの処理性能が高いことを示します。</td></tr>
                   <tr><th scope="row">スループット</th><td>一定時間あたりに処理できる仕事量です。今回のCPU測定では、1秒あたりの処理イベント数として示しています。</td></tr>
-                  <tr><th scope="row">帯域幅（Bandwidth）</th><td>1秒間に読み書きできるデータ量です。MiB/sやGiB/sの値が大きいほど、メモリとのデータ転送性能が高くなります。</td></tr>
-                  <tr><th scope="row">MiB / GiB</th><td>データ量の単位です。1 GiBは1,024 MiBに相当します。</td></tr>
+                  <tr><th scope="row">IOPS</th><td>1秒あたりの入出力操作数（Input/Output Operations Per Second）です。値が大きいほど、細かい読み書きを多く処理できます。</td></tr>
+                  <tr><th scope="row">帯域幅（Bandwidth）</th><td>1秒間に読み書きできるデータ量です。MiB/sやGiB/sの値が大きいほど、データ転送性能が高くなります。</td></tr>
+                  <tr><th scope="row">MiB / GiB</th><td>データ量の単位です。1 GiBは1,024 MiBに相当します。fioではKiB/sを1,024で割ってMiB/sへ換算しています。</td></tr>
                   <tr><th scope="row">レイテンシ（Latency）</th><td>処理の要求を出してから、データの読み書きが完了するまでの遅延時間です。値が小さいほど応答が速いことを示します。</td></tr>
+                  <tr><th scope="row">us / ns</th><td>時間の単位です。1 us（マイクロ秒）は1,000 ns（ナノ秒）に相当します。</td></tr>
                 </tbody>
               </table>
             </div>
