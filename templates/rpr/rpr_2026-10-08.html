@@ -43,6 +43,51 @@ sudo apt autoremove -y</code></pre>
             <img class="report-image" src="../../imgs/2026-10-07iperf3.png" alt="iperf3の測定結果">
             <h3>測定スクリプトの整理</h3>
             <p>ベンチマークをSysBench、fio、iperf3の項目別スクリプトに分割しました。また、SysBenchとfioをそれぞれ10回実行する <code>run_all.sh</code> を作成しました。iperf3は別途10回実行する計画です。</p>
+            <p>参考として、20スレッド割り当てた状態でSysBench, fio, iperf3を10回実行し、SysBench, fioの平均値を算出しました。iperf3の結果は後日追加予定です。</p>
+            <h3>ベンチマーク測定結果</h3>
+            <p>20スレッドを割り当てた環境で測定した、CPUの処理性能とRAMの帯域幅・レイテンシの平均値です。</p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <caption>CPU測定結果</caption>
+                <thead>
+                  <tr><th scope="col">指標</th><th scope="col">平均値</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">演算速度（CPU speed）</th><td>36,247.221 events/s</td></tr>
+                  <tr><th scope="row">スループット</th><td>36,247.221 events/s</td></tr>
+                  <tr><th scope="row">60秒間の平均処理イベント数</th><td>2,174,897.9 events</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <caption>RAM測定結果</caption>
+                <thead>
+                  <tr><th scope="col">種別</th><th scope="col">帯域幅（平均）</th><th scope="col">帯域幅（GiB/s）</th><th scope="col">レイテンシ平均</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">Read（読み込み）</th><td>128,626.518 MiB/s</td><td>約125.612 GiB/s</td><td>約0.000025 ms</td></tr>
+                  <tr><th scope="row">Write（書き込み）</th><td>14,218.582 MiB/s</td><td>約13.885 GiB/s</td><td>約0.001212 ms</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>CPUの値は10回の測定結果の平均値です。RAMのReadはメモリからの読み込み、Writeはメモリへの書き込みを表します。</p>
+            <h3>用語の説明</h3>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr><th scope="col">用語</th><th scope="col">説明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">events/s</th><td>1秒あたりに処理できたイベント数です。値が大きいほど、単位時間あたりの処理性能が高いことを示します。</td></tr>
+                  <tr><th scope="row">スループット</th><td>一定時間あたりに処理できる仕事量です。今回のCPU測定では、1秒あたりの処理イベント数として示しています。</td></tr>
+                  <tr><th scope="row">帯域幅（Bandwidth）</th><td>1秒間に読み書きできるデータ量です。MiB/sやGiB/sの値が大きいほど、メモリとのデータ転送性能が高くなります。</td></tr>
+                  <tr><th scope="row">MiB / GiB</th><td>データ量の単位です。1 GiBは1,024 MiBに相当します。</td></tr>
+                  <tr><th scope="row">レイテンシ（Latency）</th><td>処理の要求を出してから、データの読み書きが完了するまでの遅延時間です。値が小さいほど応答が速いことを示します。</td></tr>
+                </tbody>
+              </table>
+            </div>
+
           </section>
           <section class="article-section"><h2>今後の計画</h2><ul><li>ホストOS上でSysBenchとfioを各10回、iperf3を10回実行する</li><li>測定結果と実行環境を記録し、異常値やばらつきを確認する</li><li>結果をグラフ化し、VM・Docker環境との比較に備える</li></ul></section>
           <section class="article-section"><h2>参考文献</h2><p>今回の作業で新たに参照した文献はありません。</p></section>
