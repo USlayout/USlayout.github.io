@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="2026年10月14日の研究経過報告書。fio、sysbench、iperf3の測定結果を整理した内容です。">
+  <title>2026年10月14日 研究経過報告書 | 研究ノート</title>
+  <link rel="stylesheet" href="../../static/css/style.css">
+  <script src="../../static/js/archive.js" defer></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span><strong>研究ノート</strong><small>GRADUATION RESEARCH · Gr03</small></span>
+      </a>
+      <span class="header-note"><span class="status-dot"></span>ベンチマーク結果の整理</span>
+    </header>
+    <main class="page-grid article-layout">
+      <section class="main-column">
+        <a class="back-link" href="../index.html">← トップページへ戻る</a>
+        <article class="article-paper">
+          <div class="article-date"><time datetime="2026-10-14">2026.10.14</time> · RESEARCH PROGRESS REPORT</div>
+          <h1>研究経過報告書</h1>
+          <p class="article-subtitle">fio・sysbench・iperf3の測定結果を平均値・中央値で整理</p>
+          <div class="article-meta">
+            <span><strong>グループ：</strong>Gr03</span>
+            <span><strong>学籍番号・氏名：</strong>123D024 大槻 雅宜</span>
+            <span><strong>学籍番号・氏名：</strong>123D075 添野 真之介</span>
+          </div>
+
+          <section class="article-section">
+            <h2>研究テーマ</h2>
+            <p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究</p>
+          </section>
+
+          <section class="article-section">
+            <h2>進捗状況</h2>
+            <p>本日は、ホスト環境で行った fio、sysbench、iperf3 の各測定結果を 10 回分まとめ、平均値と中央値を整理した。これにより、測定ごとのばらつきと代表値の傾向を把握しやすくなった。</p>
+            <ul>
+              <li>fio では rand_read / rand_write の IOPS と処理性能をまとめ、平均値・中央値を確認した。</li>
+              <li>sysbench では CPU と memory read/write の処理数と帯域幅を整理し、安定性の把握を行った。</li>
+              <li>iperf3 では TCP / UDP の転送速度を平均値・中央値の観点から比較した。</li>
+            </ul>
+
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <caption>10回測定の代表値一覧</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">測定項目</th>
+                    <th scope="col">平均値</th>
+                    <th scope="col">中央値</th>
+                    <th scope="col">単位</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">fio rand_read</th>
+                    <td>627,332.20</td>
+                    <td>627,356.97</td>
+                    <td>IOPS</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">fio rand_write</th>
+                    <td>714,728.81</td>
+                    <td>715,387.80</td>
+                    <td>IOPS</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">sysbench CPU</th>
+                    <td>6,060.19</td>
+                    <td>6,060.40</td>
+                    <td>events/sec</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">sysbench memory read</th>
+                    <td>40,453.85</td>
+                    <td>40,602.96</td>
+                    <td>MiB/sec</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">iperf3 TCP</th>
+                    <td>927.749</td>
+                    <td>936.851</td>
+                    <td>Mbps</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">iperf3 UDP</th>
+                    <td>955.948</td>
+                    <td>955.953</td>
+                    <td>Mbps</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>今回の整理では、平均値と中央値を並べて確認することで、個々の測定結果における外れ値の影響を見抜きやすくした。特に iperf3 UDP は平均値と中央値がほぼ一致しており、通信性能が比較的安定していると判断できる。</p>
+          </section>
+
+          <section class="article-section">
+            <h2>今後の計画</h2>
+            <ul>
+              <li>fio、sysbench、iperf3 の結果を同じ形式で比較できるように、集計表とグラフを整理する。</li>
+              <li>各実験条件ごとの差分が分かるように、CPU、メモリ、ネットワークの比較軸を揃える。</li>
+              <li>最終的な研究報告書へ反映するため、測定条件と代表値の説明文を追記する。</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <h2>参考文献</h2>
+            <p>今回の作業において新たな参考文献は追加していない。</p>
+          </section>
+
+          <div class="article-end">研究経過報告書 · 2026年10月14日 · Gr03</div>
+        </article>
+      </section>
+
+      <aside class="sidebar" aria-label="報告書一覧">
+        <div class="sidebar-sticky">
+          <div class="sidebar-heading">
+            <span class="sidebar-heading-mark"></span>
+            <div>
+              <span class="section-kicker">ARCHIVE</span>
+              <h2>レポート一覧</h2>
+            </div>
+          </div>
+
+          <section class="archive-group">
+            <div class="archive-title">
+              <span class="archive-icon report-icon" aria-hidden="true">▤</span>
+              <h3>研究経過報告書</h3>
+            </div>
+            <a class="archive-link is-current" href="rpr_2026-10-14.html">
+              <span class="archive-date">2026.10.14</span>
+              <span class="archive-label">fio・sysbench・iperf3の代表値を整理</span>
+              <span class="archive-arrow" aria-hidden="true">↗</span>
+            </a>
+          </section>
+
+          <section class="archive-group">
+            <div class="archive-title">
+              <span class="archive-icon plan-icon" aria-hidden="true"></span>
+              <h3>実験計画書</h3>
+            </div>
+            <a class="archive-link" href="../ep/ep_YYYY-MM-DD.html">
+              <span class="archive-date">YYYY.MM.DD</span>
+              <span class="archive-label">実験タイトル</span>
+              <span class="archive-arrow" aria-hidden="true">↗</span>
+            </a>
+          </section>
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
