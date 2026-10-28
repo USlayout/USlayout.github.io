@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="2026年10月28日の研究経過報告書。Docker環境で実施したベンチマーク結果を整理した内容です。">
+  <title>2026年10月28日 研究経過報告書 | 研究ノート</title>
+  <link rel="stylesheet" href="../../static/css/style.css">
+  <script src="../../static/js/archive.js" defer></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span><strong>研究ノート</strong><small>GRADUATION RESEARCH · Gr03</small></span>
+      </a>
+      <span class="header-note"><span class="status-dot"></span>ベンチマーク結果の整理</span>
+    </header>
+
+    <main class="page-grid article-layout">
+      <section class="main-column">
+        <a class="back-link" href="../index.html">← トップページへ戻る</a>
+        <article class="article-paper">
+          <div class="article-date"><time datetime="2026-10-28">2026.10.28</time> · RESEARCH PROGRESS REPORT</div>
+          <h1>研究経過報告書</h1>
+          <p class="article-subtitle">Docker環境における性能測定と結果の集計</p>
+          <div class="article-meta">
+            <span><strong>グループ：</strong>Gr03</span>
+            <span><strong>学籍番号・氏名：</strong>123D024 大槻 雅宜</span>
+            <span><strong>学籍番号・氏名：</strong>123D075 添野 真之介</span>
+          </div>
+
+          <section class="article-section">
+            <h2>研究テーマ</h2>
+            <p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究</p>
+          </section>
+
+          <section class="article-section">
+            <h2>進捗状況</h2>
+            <p>Docker環境において、sysbench、fio、iperf3を用いたベンチマークを各10回実施し、測定結果を集計した。</p>
+            <ul>
+              <li>sysbenchでは、CPU性能とメモリのREAD・WRITE性能を測定した。</li>
+              <li>fioでは、ランダムおよびシーケンシャルのREAD・WRITE性能を測定した。</li>
+              <li>iperf3では、TCP・UDPのネットワーク性能を測定した。</li>
+            </ul>
+            <p>各測定結果を整理し、Docker環境における性能の傾向と測定値のばらつきを確認した。</p>
+          </section>
+
+          <section class="article-section">
+            <h2>測定結果</h2>
+            <p>今回の測定で得られた代表的な結果は以下のとおりである。</p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <caption>Docker環境の代表値</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">測定項目</th>
+                    <th scope="col">平均値</th>
+                    <th scope="col">標準偏差</th>
+                    <th scope="col">単位</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">sysbench CPU</th>
+                    <td>3,084.09</td>
+                    <td>0.82</td>
+                    <td>events/sec</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">fio ランダムREAD</th>
+                    <td>610,671.68</td>
+                    <td>148.82</td>
+                    <td>IOPS</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">fio シーケンシャルWRITE</th>
+                    <td>3,724.86</td>
+                    <td>2.39</td>
+                    <td>MiB/sec</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">iperf3 TCP</th>
+                    <td>933.612</td>
+                    <td>7.237</td>
+                    <td>Mbps</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">iperf3 UDP</th>
+                    <td>999.995</td>
+                    <td>0.000</td>
+                    <td>Mbps</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>測定値の詳細と中央値を含む全項目は、集計結果として整理した。今回の結果では、iperf3 UDPのばらつきが小さく、安定した通信性能が確認できた。</p>
+          </section>
+
+          <section class="article-section">
+            <h2>今後の計画</h2>
+            <ul>
+              <li>Docker、KVM、ホスト環境の測定結果を同一条件で比較する。</li>
+              <li>平均値・中央値・標準偏差の差から、各環境の性能と安定性を分析する。</li>
+              <li>外れ値が発生した測定について、CPU割り当て、I/O負荷、ネットワーク状態などの要因を確認する。</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <h2>参考資料</h2>
+            <p>なし</p>
+          </section>
+
+          <div class="article-end">研究経過報告書 · 2026年10月28日 · Gr03</div>
+        </article>
+      </section>
+
+      <aside class="sidebar" aria-label="報告書一覧">
+        <div class="sidebar-sticky">
+          <div class="sidebar-heading">
+            <span class="sidebar-heading-mark"></span>
+            <div>
+              <span class="section-kicker">ARCHIVE</span>
+              <h2>レポート一覧</h2>
+            </div>
+          </div>
+
+          <section class="archive-group">
+            <div class="archive-title">
+              <span class="archive-icon report-icon" aria-hidden="true">▤</span>
+              <h3>研究経過報告書</h3>
+            </div>
+            <a class="archive-link is-current" href="rpr_2026-10-29.html">
+              <span class="archive-date">2026.10.28</span>
+              <span class="archive-label">Docker環境の性能測定と結果の集計</span>
+              <span class="archive-arrow" aria-hidden="true">↗</span>
+            </a>
+          </section>
+
+          <section class="archive-group">
+            <div class="archive-title">
+              <span class="archive-icon plan-icon" aria-hidden="true"></span>
+              <h3>実験計画書</h3>
+            </div>
+            <span class="archive-link">
+              <span class="archive-date">—</span>
+              <span class="archive-label">準備中</span>
+            </span>
+          </section>
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
