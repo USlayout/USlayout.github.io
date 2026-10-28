@@ -46,12 +46,13 @@
               <li>iperf3では、TCP・UDPのネットワーク性能を測定した。</li>
             </ul>
             <p>各測定結果を整理し、Docker環境における性能の傾向と測定値のばらつきを確認した。</p>
-            <p>さらに、KVM上でDockerを動作させた環境についても同様に集計した。fio、sysbench、iperf3のJSONファイルと結果TXTから集計対象の値を抽出するスクリプトを作成し、抽出結果をCSVと説明用TXTに出力した。</p>
+            <p>さらに、KVM上でDockerを動作させた環境についても同様に集計した。fio、sysbench、iperf3のベンチマーク結果を整理した。</p>
             <ul>
               <li>KVM上DockerのFIO：40件の測定値を抽出し、IOPS、スループット、レイテンシを集計した。</li>
               <li>KVM上Dockerのsysbench：30件の測定値を抽出し、CPU、メモリREAD、メモリWRITEを集計した。</li>
               <li>KVM上Dockerのiperf3：TCP・UDP合わせて20件の測定値を抽出し、スループットとレイテンシ相当値を集計した。</li>
             </ul>
+            <p>集計結果をグラフ化して比較できるようにしました。次は、Eコアにてベンチマークを4環境で実施する予定です。</p>
           </section>
 
           <section class="article-section">
