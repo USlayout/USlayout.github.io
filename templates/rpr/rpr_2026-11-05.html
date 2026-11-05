@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="2026年11月5日の研究経過報告書。Eコア4コアに固定したホスト環境とKVM環境のベンチマーク結果を整理した内容です。">
+  <title>2026年11月5日 研究経過報告書 | 研究ノート</title>
+  <link rel="stylesheet" href="../../static/css/style.css">
+  <script src="../../static/js/archive.js" defer></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span><strong>研究ノート</strong><small>GRADUATION RESEARCH · Gr03</small></span>
+      </a>
+      <span class="header-note"><span class="status-dot"></span>Eコア4コアの測定結果</span>
+    </header>
+
+    <main class="page-grid article-layout">
+      <section class="main-column">
+        <a class="back-link" href="../index.html">← トップページへ戻る</a>
+        <article class="article-paper">
+          <div class="article-date"><time datetime="2026-11-05">2026.11.05</time> · RESEARCH PROGRESS REPORT</div>
+          <h1>研究経過報告書</h1>
+          <p class="article-subtitle">Eコア4コアに固定したホスト環境とKVM環境の性能結果を整理</p>
+          <div class="article-meta">
+            <span><strong>グループ：</strong>C-8</span>
+            <span><strong>学籍番号・氏名：</strong>123D024 大槻 雅宜</span>
+            <span><strong>学籍番号・氏名：</strong>123D075 添野 真之介</span>
+          </div>
+
+          <section class="article-section">
+            <h2>研究テーマ</h2>
+            <p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究</p>
+          </section>
+
+          <section class="article-section">
+            <h2>進捗状況</h2>
+            <p>Eコア4コアに絞った条件で、ホスト環境とKVM環境のベンチマークを各10回実施した。実験データから平均値、中央値、標準偏差を整理し、環境間で比較できる形にまとめた。</p>
+            <ul>
+              <li>sysbench：CPU、メモリREAD、メモリWRITEを測定した。</li>
+              <li>fio：ランダム／シーケンシャルのREAD・WRITEについて、IOPS、スループット、レイテンシを測定した。</li>
+              <li>iperf3：TCP・UDPのスループットと遅延指標を測定した。</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <h2>測定結果</h2>
+            <p>以下の表は、各環境で10回測定した結果の集計値である。数値は元データの単位を維持している。</p>
+
+            <h3>sysbench</h3>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <caption>sysbenchの集計結果</caption>
+                <thead>
+                  <tr><th scope="col">環境</th><th scope="col">測定項目</th><th scope="col">平均値</th><th scope="col">中央値</th><th scope="col">標準偏差</th><th scope="col">単位</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">ホスト</th><td>CPU</td><td>11,272.23</td><td>11,295.14</td><td>48.02</td><td>events/sec</td></tr>
+                  <tr><th scope="row">ホスト</th><td>memory read</td><td>36,226.40</td><td>38,511.22</td><td>4,112.93</td><td>MiB/sec</td></tr>
+                  <tr><th scope="row">ホスト</th><td>memory write</td><td>13,667.52</td><td>13,383.22</td><td>768.14</td><td>MiB/sec</td></tr>
+                  <tr><th scope="row">KVM</th><td>CPU</td><td>5,636.15</td><td>5,635.98</td><td>1.84</td><td>events/sec</td></tr>
+                  <tr><th scope="row">KVM</th><td>memory read</td><td>17,025.35</td><td>17,039.90</td><td>39.12</td><td>MiB/sec</td></tr>
+                  <tr><th scope="row">KVM</th><td>memory write</td><td>11,635.91</td><td>11,648.61</td><td>25.72</td><td>MiB/sec</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>fio</h3>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <caption>fioの集計結果</caption>
+                <thead>
+                  <tr><th scope="col">環境</th><th scope="col">テスト</th><th scope="col">指標</th><th scope="col">平均値</th><th scope="col">中央値</th><th scope="col">標準偏差</th><th scope="col">単位</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">ホスト</th><td>rand_read</td><td>IOPS</td><td>627,070.46</td><td>627,043.72</td><td>170.34</td><td>IOPS</td></tr>
+                  <tr><th scope="row">ホスト</th><td>rand_read</td><td>throughput</td><td>2,449.49</td><td>2,449.39</td><td>0.67</td><td>MiB/sec</td></tr>
+                  <tr><th scope="row">ホスト</th><td>rand_read</td><td>latency</td><td>203.92</td><td>203.92</td><td>0.05</td><td>us</td></tr>
+                  <tr><th scope="row">ホスト</th><td>rand_write</td><td>IOPS</td><td>715,592.69</td><td>714,797.47</td><td>2,238.46</td><td>IOPS</td></tr>
+                  <tr><th scope="row">ホスト</th><td>rand_write</td><td>throughput</td><td>2,795.28</td><td>2,792.18</td><td>8.74</td><td>MiB/sec</td></tr>
+                  <tr><th scope="row">ホスト</th><td>rand_write</td><td>latency</td><td>178.66</td><td>178.86</td><td>0.56</td><td>us</td></tr>
+                  <tr><th scope="row">ホスト</th><td>seq_read</td><td>IOPS</td><td>3,069.32</td><td>3,164.08</td><td>200.90</td><td>IOPS</td></tr>
+                  <tr><th scope="row">ホスト</th><td>seq_read</td><td>throughput</td><td>3,069.32</td><td>3,164.08</td><td>200.90</td><td>MiB/sec</td></tr>
+                  <tr><th scope="row">ホスト</th><td>seq_read</td><td>latency</td><td>327.16</td><td>315.74</td><td>24.81</td><td>us</td></tr>
+                  <tr><th scope="row">ホスト</th><td>seq_write</td><td>IOPS</td><td>3,726.88</td><td>3,727.09</td><td>1.58</td><td>IOPS</td></tr>
+                  <tr><th scope="row">ホスト</th><td>seq_write</td><td>throughput</td><td>3,726.88</td><td>3,727.09</td><td>1.58</td><td>MiB/sec</td></tr>
+                  <tr><th scope="row">ホスト</th><td>seq_write</td><td>latency</td><td>268.07</td><td>268.06</td><td>0.11</td><td>us</td></tr>
+                  <tr><th scope="row">KVM</th><td>rand_read</td><td>IOPS</td><td>432,880.54</td><td>435,469.28</td><td>7,807.62</td><td>IOPS</td></tr>
+                  <tr><th scope="row">KVM</th><td>rand_read</td><td>throughput</td><td>1,690.94</td><td>1,701.05</td><td>30.50</td><td>MiB/sec</td></tr>
+                  <tr><th scope="row">KVM</th><td>rand_read</td><td>latency</td><td>295.50</td><td>293.67</td><td>5.36</td><td>us</td></tr>
+                  <tr><th scope="row">KVM</th><td>rand_write</td><td>IOPS</td><td>392,402.91</td><td>388,308.37</td><td>10,189.26</td><td>IOPS</td></tr>
+                  <tr><th scope="row">KVM</th><td>rand_write</td><td>throughput</td><td>1,532.82</td><td>1,516.83</td><td>39.80</td><td>MiB/sec</td></tr>
+                  <tr><th scope="row">KVM</th><td>rand_write</td><td>latency</td><td>326.07</td><td>329.29</td><td>8.35</td><td>us</td></tr>
+                  <tr><th scope="row">KVM</th><td>seq_read</td><td>IOPS</td><td>5,812.40</td><td>4,542.75</td><td>3,189.75</td><td>IOPS</td></tr>
+                  <tr><th scope="row">KVM</th><td>seq_read</td><td>throughput</td><td>5,812.40</td><td>4,542.75</td><td>3,189.75</td><td>MiB/sec</td></tr>
+                  <tr><th scope="row">KVM</th><td>seq_read</td><td>latency</td><td>220.71</td><td>226.96</td><td>99.50</td><td>us</td></tr>
+                  <tr><th scope="row">KVM</th><td>seq_write</td><td>IOPS</td><td>3,437.32</td><td>2,850.20</td><td>1,211.57</td><td>IOPS</td></tr>
+                  <tr><th scope="row">KVM</th><td>seq_write</td><td>throughput</td><td>3,437.32</td><td>2,850.20</td><td>1,211.57</td><td>MiB/sec</td></tr>
+                  <tr><th scope="row">KVM</th><td>seq_write</td><td>latency</td><td>327.71</td><td>350.97</td><td>108.03</td><td>us</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>iperf3</h3>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <caption>iperf3の集計結果</caption>
+                <thead>
+                  <tr><th scope="col">環境</th><th scope="col">プロトコル</th><th scope="col">スループット平均</th><th scope="col">スループット中央値</th><th scope="col">標準偏差</th><th scope="col">遅延指標</th><th scope="col">遅延平均</th><th scope="col">遅延中央値</th><th scope="col">単位</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">ホスト</th><td>TCP</td><td>937.086</td><td>940.232</td><td>9.045</td><td>mean_rtt</td><td>2.257800</td><td>2.376500</td><td>Mbps / ms</td></tr>
+                  <tr><th scope="row">ホスト</th><td>UDP</td><td>956.432</td><td>956.432</td><td>0.009</td><td>jitter_ms</td><td>0.016544</td><td>0.011948</td><td>Mbps / ms</td></tr>
+                  <tr><th scope="row">KVM</th><td>TCP</td><td>939.126</td><td>938.772</td><td>2.012</td><td>mean_rtt</td><td>3.064700</td><td>2.597500</td><td>Mbps / ms</td></tr>
+                  <tr><th scope="row">KVM</th><td>UDP</td><td>999.993</td><td>999.993</td><td>0.000</td><td>jitter_ms</td><td>0.021604</td><td>0.021723</td><td>Mbps / ms</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>iperf3のTCP遅延は送信側の <code>mean_rtt</code>、UDP遅延は <code>jitter_ms</code> を使用した。</p>
+          </section>
+
+          <section class="article-section">
+            <h2>結果の整理</h2>
+            <ul>
+              <li>sysbench CPUはホスト環境が11,272.23 events/sec、KVM環境が5,636.15 events/secで、ホスト環境が約2倍となった。</li>
+              <li>fioのランダムアクセスは、ホスト環境の方がKVM環境より高いIOPSとスループットを示した。</li>
+              <li>fioのKVM環境は、特にシーケンシャルREAD・WRITEで標準偏差が大きく、測定値のばらつきが見られた。</li>
+              <li>iperf3はTCP・UDPともにおおむね安定しており、KVM環境のUDPスループットは999.993 Mbpsとなった。</li>
+            </ul>
+            <p>環境間の性能差を正確に評価するには、同一のディスク、メモリ、ネットワーク設定を確認したうえで、今回のEコア4コアの結果を従来条件と比較する必要がある。</p>
+          </section>
+
+          <section class="article-section">
+            <h2>前回の実験結果の考察</h2>
+            <p>4環境の性能を比較した結果、CPU性能ではDocker環境のみ約49%の性能低下が見られた。メモリ性能ではREADにおいて仮想環境で性能低下が確認された。ストレージ性能では、特にKVM環境で性能低下や測定値のばらつきが大きく、仮想ディスクやキャッシュ設定の影響が考えられる。一方、ネットワーク性能では環境間の差が小さく、1Gbpsの帯域上限が影響した可能性がある。</p>
+            <p>先行研究と比較すると、ストレージ性能の低下は類似した傾向を示したが、Docker環境のCPU性能など一部で異なる結果が得られた。</p>
+          </section>
+
+          <section class="article-section">
+            <h2>集計方法と元データ</h2>
+            <ul>
+              <li>平均値：10回分の測定値の算術平均</li>
+              <li>中央値：10個の値を並べ替え、中央2値の平均</li>
+              <li>標準偏差：10回の測定値を母集団とした標準偏差</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <h2>今後の課題と計画</h2>
+            <p>Docker環境のCPU性能とKVM環境のストレージ性能を中心に、CPU割り当てやキャッシュ設定などの測定条件を確認し、再測定を行う。また、測定値のばらつきを評価し、性能差の要因を明らかにする。今後はCPU affinityや仮想ディスクの設定変更による性能最適化を検討する。</p>
+            <ul>
+              <li>あとの2環境のベンチマーク</li>
+              <li>CPU、メモリ、ストレージ、ネットワークごとにグラフを作成し、環境差を可視化する。</li>
+              <li>実験の考察からもう一度確認し直し再実験を行う。</li>
+            </ul>
+          </section>
+
+          <section class="article-section">
+            <h2>参考文献</h2>
+            <p>今回の作業において新たな参考文献は追加していない。</p>
+          </section>
+
+          <div class="article-end">研究経過報告書 · 2026年11月5日 · Gr03</div>
+        </article>
+      </section>
+
+      <aside class="sidebar" aria-label="報告書一覧">
+        <div class="sidebar-sticky">
+          <div class="sidebar-heading"><span class="sidebar-heading-mark"></span><div><span class="section-kicker">ARCHIVE</span><h2>レポート一覧</h2></div></div>
+          <section class="archive-group">
+            <div class="archive-title"><span class="archive-icon report-icon" aria-hidden="true">▤</span><h3>研究経過報告書</h3></div>
+            <a class="archive-link is-current" href="rpr_2026-11-05.html"><span class="archive-date">2026.11.05</span><span class="archive-label">Eコア4コアの測定結果</span><span class="archive-arrow" aria-hidden="true">↗</span></a>
+          </section>
+          <section class="archive-group">
+            <div class="archive-title"><span class="archive-icon plan-icon" aria-hidden="true"></span><h3>実験計画書</h3></div>
+            <a class="archive-link" href="../ep/ep_YYYY-MM-DD.html"><span class="archive-date">YYYY.MM.DD</span><span class="archive-label">実験タイトル</span><span class="archive-arrow" aria-hidden="true">↗</span></a>
+          </section>
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
