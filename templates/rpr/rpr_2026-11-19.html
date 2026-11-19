@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="リソース監視のWeb化と、64bit整数除算の特性を踏まえた実験計画の見直しについて報告します。">
+  <title>研究経過報告書（2026年11月19日） | 卒業研究</title>
+  <link rel="stylesheet" href="../../static/css/style.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span><strong>卒業研究</strong><small>GRADUATION RESEARCH · C-8</small></span></a></header>
+    <main class="page-grid article-layout">
+      <section class="main-column">
+        <a class="back-link" href="../index.html">← トップページへ戻る</a>
+        <article class="article-paper">
+          <div class="article-date">2026.11.19</div>
+          <h1>研究経過報告書</h1>
+          <p class="article-subtitle">リソース監視のWeb化と実験計画の見直し</p>
+          <div class="article-meta"><span><strong>グループ：</strong>C-8</span><span><strong>学籍番号・氏名：</strong>123D024 大槻  雅宜 </span><span><strong>学籍番号・氏名：</strong>123D075 添野真之介 </span></div>
+          <section class="article-section"><h2>研究テーマ</h2><p>サーバー仮想化技術とコンテナ技術の性能比較および最適化に関する研究 </p></section>
+          <section class="article-section"><h2>進捗状況</h2><ul><li>リソースの使用状況を監視しやすくするため、Webブラウザーから確認できるようにした。監視画面は <a href="http://192.168.50.13:8765/">192.168.50.13:8765</a> で、ローカル環境でのみ閲覧可能。</li><li>64bit整数除算の特性について得られた知見を踏まえ、新しい実験計画書を作成した。sysbenchのCPUベンチマーク結果は、Pコア内・Eコア内でそれぞれの実行環境による性能差を比較する指標とし、PコアとEコアを横断した比較には用いない。コア種別と実行環境を横断した比較には、Webサーバーとデータベースの実用性能を測るベンチマークを追加する。</li></ul></section>
+          <section class="article-section"><h2>調べた結果</h2><p>今回の測定では、64bit整数除算のスループット値（1命令当たりのサイクル数）が小さい方がスコアが高くなるため、Eコアの方が高いスコアを示していた。スコアを比較する際は、この演算特性を踏まえて結果を解釈する必要がある。CPUごとのスループット値は、<a href="https://uops.info/html-instr/DIV_R64.html">uops.infoのDIV (R64)の測定データ</a>を参照した。</p></section>
+          <section class="article-section"><h2>追加するベンチマークの概要</h2><ul><li><strong>Webサーバー性能（Nginx＋wrk）：</strong><a href="https://nginx.org/en/">Nginx</a>はHTTPリクエストに応じてWebコンテンツを配信するWebサーバーである。HTTPベンチマークツールの<a href="https://github.com/wg/wrk">wrk</a>から同時にリクエストを送り、1秒当たりの処理リクエスト数（Requests/sec）と応答時間を測定する。</li><li><strong>データベース性能（PostgreSQL＋pgbench）：</strong>PostgreSQLはSQLを用いてデータを管理するリレーショナルデータベースである。PostgreSQLに標準同梱されているベンチマークツールの<a href="https://www.postgresql.org/docs/current/pgbench.html">pgbench</a>でSQLによるトランザクション処理を繰り返し実行し、1秒当たりの処理トランザクション数（TPS）と平均応答時間を測定する。</li></ul></section>
+          <section class="article-section"><h2>今後の計画</h2><p>新しい実験計画書に基づき、Nginx＋wrkおよびPostgreSQL＋pgbenchによる測定を追加する。各ベンチマークで処理内容・同時接続数・測定時間などの条件をそろえ、Pコア・Eコアおよび各実行環境の実用性能を比較する。</p></section>
+          <section class="article-section"><h2>関連資料</h2><ul class="reference-list"><li><a href="https://nitay.sharepoint.com/:w:/r/sites/-202685/Shared%20Documents/個人フォルダ/C-8（Gr03）/実験計画書/実験計画書.docx?d=wf610ca8725d843dcb91051dca178625b&amp;csf=1&amp;web=1&amp;e=sl07AN">新しい実験計画書（SharePoint）</a></li><li><a href="https://uops.info/html-instr/DIV_R64.html">uops.info：DIV (R64) — 64bit符号なし整数除算のスループット・レイテンシ測定データ</a></li></ul></section>
+          <div class="article-end">研究経過報告書 · C-8</div>
+        </article>
+      </section>
+      <aside class="sidebar" aria-label="報告書一覧"><div class="sidebar-sticky"><div class="sidebar-heading"><span class="sidebar-heading-mark"></span><div><span class="section-kicker">ARCHIVE</span><h2>レポート一覧</h2></div></div><section class="archive-group"><div class="archive-title"><span class="archive-icon report-icon" aria-hidden="true">▤</span><h3>研究経過報告書</h3></div><a class="archive-link" href="rpr_2026-11-19.html"><span class="archive-date">2026.11.19</span><span class="archive-label">リソース監視のWeb化と実験計画の見直し</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section><section class="archive-group"><div class="archive-title"><span class="archive-icon plan-icon" aria-hidden="true"></span><h3>実験計画書</h3></div><a class="archive-link" href="https://nitay.sharepoint.com/:w:/r/sites/-202685/Shared%20Documents/個人フォルダ/C-8（Gr03）/実験計画書/実験計画書.docx?d=wf610ca8725d843dcb91051dca178625b&amp;csf=1&amp;web=1&amp;e=sl07AN"><span class="archive-date">2026.11.19</span><span class="archive-label">新しい実験計画書</span><span class="archive-arrow" aria-hidden="true">↗</span></a></section></div></aside>
+    </main>
+  </div>
+</body>
+</html>
